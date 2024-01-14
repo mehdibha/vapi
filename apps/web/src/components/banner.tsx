@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Button, XIcon } from "@vapotertn/ui";
-import { CollectEmailsModal } from "./collect-emails-modal";
 
 export const Banner = () => {
   const [displayed, setDisplayed] = React.useState(true);
@@ -42,11 +41,9 @@ export const Banner = () => {
           work in progress. I&apos;m building this in public. You can follow the progress
           on Twitter @mehdibha_. See the roadmap below.
         </span>
-        <CollectEmailsModal>
-          <Button size="sm" color="primary">
-            Join waitlist
-          </Button>
-        </CollectEmailsModal>
+        <Button size="sm" color="primary">
+          Join waitlist
+        </Button>
       </p>
       <div className="flex flex-1 justify-end">
         <Button
