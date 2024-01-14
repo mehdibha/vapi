@@ -9,19 +9,18 @@
   <a href="https://github.com/mehdibha/vapotertn">
     <img src="https://vapotertn.co/images/logo.png" alt="Logo" width="80" height="80">
   </a>
-  <h1 align="center">vapotertn</h1>
+  <h1 align="center">vapoter.tn</h1>
   <p align="center">
-    Get an instant theme preview for your popular ui libraries. mui, shadcn-ui, and more.
+    A marketplace for vape products
   </p>
   <p>
     
-   <a href="https://vapotertn.co">Visit site</a>
+   <a href="https://vapoter.tn">Visit site</a>
     ·
     <a href="https://github.com/mehdibha/vapotertn/issues">Report Bug</a>
     ·
     <a href="https://github.com/mehdibha/vapotertn/issues">Request Feature</a>
   </p>
-  <a href="https://www.producthunt.com/posts/vapotertn?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-vapotertn" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=434268&theme=light" alt="vapotertn - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </div>
 
 <details>
@@ -35,7 +34,6 @@
     </li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#sites-using-notionfolio">Sites using vapotertn</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contributors">Contributors</a></li>
@@ -51,25 +49,13 @@
   <br>
   <div align="center">
     <figure>
-      <img src="/images/themes.jpg" alt="vapotertn themes" width="600">
+      <img src="/images/home-page.jpg" alt="vapotertn themes" width="600">
       <div>
-        <figcaption>Themes</figcaption>
-      </div>
-    </figure>
-    <br>
-    <figure>
-      <img src="/images/playground.jpg" alt="vapotertn playground" width="600">
-      <div>
-        <figcaption>Playground</figcaption>
+        <figcaption>Home page</figcaption>
       </div>
     </figure>
   </div>
 </details>
-
-### Supports
-
-- shadcn-ui
-- MUI (Soon)
 
 ### Built with
 
@@ -81,17 +67,9 @@
 
 ## Roadmap
 
-- [x] Site structure
-- [x] Home page
-- [x] Playground page
-- [x] Themes page
-- [x] User management
-- [x] Saved themes
-- [x] Account page
-- [x] Landing view in preview
-- [ ] Integrate gradients
-- [ ] Add fonts to theme model
-- [ ] Add multiple styles for components (start with new york and default then add custom styles)
+- [ ] Site structure
+- [ ] Home page
+      
 
 <!-- CONTRIBUTING -->
 
@@ -109,7 +87,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <table><tr align="left">
   <td align="center"><a href="https://github.com/mehdibha"><img src="https://github.com/mehdibha.png" width="64px;"alt="Mehdi BHA"/><br/><sub><b>Mehdi BHA</b></sub></a></td>
-  <td align="center"><a href="https://github.com/spa5k"><img src="https://github.com/spa5k.png" width="64px;"alt="Spark"/><br/><sub><b>Spark</b></sub></a></td>
 </tr></table>
 
 [contributors-shield]: https://img.shields.io/github/contributors/mehdibha/vapotertn.svg?style=for-the-badge
