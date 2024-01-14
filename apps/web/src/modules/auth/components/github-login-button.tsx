@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button, GithubIcon } from "@vapotertn/ui";
 import { signIn } from "next-auth/react";
+import { Button, GithubIcon } from "@vapotertn/ui";
 
 interface GithubLoginButtonProps {
   className?: string;

@@ -69,7 +69,6 @@
 
 - [ ] Site structure
 - [ ] Home page
-      
 
 <!-- CONTRIBUTING -->
 

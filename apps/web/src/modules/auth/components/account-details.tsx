@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -12,7 +13,6 @@ import {
   Input,
 } from "@vapotertn/ui";
 import { cn } from "@vapotertn/utils";
-import { useForm } from "react-hook-form";
 
 interface AccountDetailsProps {
   username?: string;

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import { signOut } from "next-auth/react";
 import { Button, ButtonProps, LogOutIcon } from "@vapotertn/ui";
 import { cn } from "@vapotertn/utils";
-import { signOut } from "next-auth/react";
 
 export const LogoutButton = (props: ButtonProps) => {
   const { className, ...restProps } = props;
