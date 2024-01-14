@@ -1,0 +1,3 @@
+{
+  "extends": "@vapotertn/ts-config/base.json"
+}

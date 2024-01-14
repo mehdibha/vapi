@@ -1,0 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { Button, MailIcon } from "@vapotertn/ui";
+import { cn } from "@vapotertn/utils";
+import { signIn } from "next-auth/react";
+
+interface EmailLoginButtonProps {
+  className?: string;
+}
+
+export function EmailLoginButton(props: EmailLoginButtonProps) {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <Button
+      icon={MailIcon}
+      loading={loading}
+      fullWidth
+      onClick={() => {
+        setLoading(true);
+        signIn("email");
+      }}
+      variant="outlined"
+      color="neutral"
+      className={cn("", props.className)}
+    >
+      Sign in with Email
+    </Button>
+  );
+}

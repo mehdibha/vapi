@@ -1,0 +1,124 @@
+[![Stargazers][stars-shield]][stars-url][![Forks][forks-shield]][forks-url][![Contributors][contributors-shield]][contributors-url][![MIT License][license-shield]][license-url][![Issues][issues-shield]][issues-url]
+
+> **Warning**
+> This app is a work in progress. I'm building this in public. You can follow the progress on Twitter [@mehdibha\_](https://twitter.com/mehdibha_).
+> See the roadmap below.
+
+<br/>
+<div align="center">
+  <a href="https://github.com/mehdibha/vapotertn">
+    <img src="https://vapotertn.co/images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+  <h1 align="center">vapotertn</h1>
+  <p align="center">
+    Get an instant theme preview for your popular ui libraries. mui, shadcn-ui, and more.
+  </p>
+  <p>
+    
+   <a href="https://vapotertn.co">Visit site</a>
+    ·
+    <a href="https://github.com/mehdibha/vapotertn/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/mehdibha/vapotertn/issues">Request Feature</a>
+  </p>
+  <a href="https://www.producthunt.com/posts/vapotertn?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-vapotertn" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=434268&theme=light" alt="vapotertn - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#sites-using-notionfolio">Sites using vapotertn</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contributors">Contributors</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+<details open>
+  <summary>Screenshots</summary>
+  <br>
+  <div align="center">
+    <figure>
+      <img src="/images/themes.jpg" alt="vapotertn themes" width="600">
+      <div>
+        <figcaption>Themes</figcaption>
+      </div>
+    </figure>
+    <br>
+    <figure>
+      <img src="/images/playground.jpg" alt="vapotertn playground" width="600">
+      <div>
+        <figcaption>Playground</figcaption>
+      </div>
+    </figure>
+  </div>
+</details>
+
+### Supports
+
+- shadcn-ui
+- MUI (Soon)
+
+### Built with
+
+- Next.js (v14 with app dir) and React
+- Typescript
+- Tailwind CSS
+- Shadcn-ui
+- Prisma
+
+## Roadmap
+
+- [x] Site structure
+- [x] Home page
+- [x] Playground page
+- [x] Themes page
+- [x] User management
+- [x] Saved themes
+- [x] Account page
+- [x] Landing view in preview
+- [ ] Integrate gradients
+- [ ] Add fonts to theme model
+- [ ] Add multiple styles for components (start with new york and default then add custom styles)
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+See the [contribution guide](CONTRIBUTING.md) and join our amazing list of [contributors](https://github.com/mehdibha/vapotertn/graphs/contributors)!
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contributors
+
+<table><tr align="left">
+  <td align="center"><a href="https://github.com/mehdibha"><img src="https://github.com/mehdibha.png" width="64px;"alt="Mehdi BHA"/><br/><sub><b>Mehdi BHA</b></sub></a></td>
+  <td align="center"><a href="https://github.com/spa5k"><img src="https://github.com/spa5k.png" width="64px;"alt="Spark"/><br/><sub><b>Spark</b></sub></a></td>
+</tr></table>
+
+[contributors-shield]: https://img.shields.io/github/contributors/mehdibha/vapotertn.svg?style=for-the-badge
+[contributors-url]: https://github.com/mehdibha/vapotertn/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/mehdibha/vapotertn.svg?style=for-the-badge
+[forks-url]: https://github.com/mehdibha/vapotertn.svg/network/members
+[stars-shield]: https://img.shields.io/github/stars/mehdibha/vapotertn.svg?style=for-the-badge
+[stars-url]: https://github.com/mehdibha/vapotertn.svg/stargazers
+[issues-shield]: https://img.shields.io/github/issues/mehdibha/vapotertn.svg?style=for-the-badge
+[issues-url]: https://github.com/mehdibha/vapotertn.svg/issues
+[license-shield]: https://img.shields.io/github/license/mehdibha/vapotertn.svg?style=for-the-badge
+[license-url]: https://github.com/mehdibha/vapotertn.svg/blob/master/LICENSE.txt
