@@ -23,8 +23,8 @@ export const Header = () => {
   const { data, status } = useSession();
 
   return (
-    <header className="bg-primary sticky top-0 z-50 shadow-sm">
-      <div className="container flex h-12 items-center justify-between py-2">
+    <header className="bg-primary text-primary-foreground dark:text-foreground dark:bg-background sticky top-0 z-50 border-b shadow-sm">
+      <div className="container flex h-14 items-center justify-between py-2">
         <Link
           href="/"
           className="flex w-[200px] items-center space-x-2 duration-150 hover:opacity-80"
