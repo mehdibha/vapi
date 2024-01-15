@@ -14,6 +14,7 @@ export const GoogleLoginButton = (props: GithubLoginButtonProps) => {
     <Button
       icon={GoogleIcon}
       loading={loading}
+      color="secondary"
       fullWidth
       onClick={() => {
         setLoading(true);
@@ -21,7 +22,7 @@ export const GoogleLoginButton = (props: GithubLoginButtonProps) => {
       }}
       className={props.className}
     >
-      Sign in with Google
+      Se connecter avec Google
     </Button>
   );
 };

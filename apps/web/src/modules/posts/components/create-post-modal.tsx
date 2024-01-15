@@ -1,19 +1,18 @@
 "use client";
 
 import React from "react";
+import { useSession } from "next-auth/react";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
   Button,
-  CameraIcon,
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  PlusCircleIcon,
   PlusIcon,
   ScrollArea,
   Textarea,
@@ -30,6 +29,8 @@ interface CreatePostModalProps {
 export const CreatePostModal = (props: CreatePostModalProps) => {
   const { children } = props;
 
+  const { data } = useSession();
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -39,12 +40,11 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
         </DialogHeader>
         <div className="flex items-center space-x-4 px-6">
           <Avatar>
-            <AvatarImage src="/avatars/01.png" alt="Image" />
-            <AvatarFallback>SD</AvatarFallback>
+            <AvatarImage src={data?.user.image ?? undefined} alt="Image" />
+            <AvatarFallback>{data?.user.name ? data.user.name[0] : ""}</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-medium leading-none">Sofia Davis</p>
-            <p className="text-muted-foreground text-xs">Il y a 3 jours</p>
+            <p className="text-sm font-medium leading-none">{data?.user.name}</p>
           </div>
         </div>
 

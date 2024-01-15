@@ -3,11 +3,11 @@ import { APP_URL } from "./constants";
 export const siteConfig = {
   global: {
     url: "https://vapotertn.co",
-    name: "vapotertn",
+    name: "vapoter.tn",
     logo: "/images/logo.png",
-    title: "vapotertn - instant preview for your theme",
+    title: "vapoter.tn",
     description:
-      "Get an instant preview for your theme with vapotertn. Export your theme in one click.",
+      "Première marketplace de vente de cigarettes électroniques en Tunisie.",
     keywords: [
       "Theme",
       "Theme customizer",

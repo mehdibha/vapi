@@ -15,7 +15,7 @@ const buttonVariants = cva(
         filled: "shadow-sm hover:shadow transition-all",
       },
       size: {
-        sm: "px-4 py-1 rounded-full min-h-[28px]",
+        sm: "px-4 py-1 min-h-[28px]",
         md: "px-4 py-2 min-h-[36px]",
         lg: "px-8 py-3 min-h-[50px]",
         icon: "h-10 w-10 min-w-0",

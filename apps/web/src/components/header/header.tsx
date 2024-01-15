@@ -19,31 +19,37 @@ import { UserMenu } from "../user-menu";
 
 const config = siteConfig.header;
 
-interface HeaderProps {
-  cta?: React.ReactNode;
-  children?: React.ReactNode;
-}
-
-export const Header = (props: HeaderProps) => {
+export const Header = () => {
   const { data, status } = useSession();
 
   return (
-    <header className="bg-background sticky top-0 z-50 shadow-sm">
+    <header className="bg-primary sticky top-0 z-50 shadow-sm">
       <div className="container flex h-12 items-center justify-between py-2">
-        <span className="font-bold">Vapoter.tn</span>
+        <Link
+          href="/"
+          className="flex w-[200px] items-center space-x-2 duration-150 hover:opacity-80"
+        >
+          {/* <Image
+            src={siteConfig.global.logo}
+            alt={siteConfig.global.name}
+            loading="lazy"
+            width={20}
+            height={20}
+          /> */}
+          <span className="inline-block font-bold">{siteConfig.global.name}</span>
+        </Link>
         <Input
           placeholder="Rechercher sur vapoter.tn"
           className="max-w-[400px] bg-white"
         />
-        <div>
+        <div className="flex w-[200px] justify-end">
           {status === "unauthenticated" && (
-            <Button href="/login" color="primary" size="sm">
-              Login
+            <Button href="/login" color="secondary" size="sm">
+              Se connecter
             </Button>
           )}
           {status === "authenticated" && <UserMenu user={data.user} />}
         </div>
-        <MobileNav />
       </div>
     </header>
   );

@@ -49,12 +49,12 @@ export const UserMenu = (props: UserMenuProps) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild className="cursor-pointer">
+          {/* <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/my-themes">Dashboard</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/account">Account</Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem
             className="flex cursor-pointer justify-between"
             onClick={() => {

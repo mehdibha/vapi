@@ -1,14 +1,12 @@
 import React from "react";
 import {
   Dialog,
-  DialogFooter,
   DialogHeader,
   DialogTrigger,
   DialogDescription,
   DialogTitle,
   DialogContent,
 } from "@vapotertn/ui";
-import { GithubLoginButton } from "./github-login-button";
 import { GoogleLoginButton } from "./google-login-button";
 
 interface LoginModalProps {
@@ -25,14 +23,13 @@ export const LoginModal = (props: LoginModalProps) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-sm pt-10">
         <DialogHeader>
-          <DialogTitle className="text-center">Login</DialogTitle>
+          <DialogTitle className="text-center">Se connecter</DialogTitle>
           <DialogDescription className="text-center">
-            You have to login first.
+            Vous devez vous connecter pour pouvoir publier.
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 space-y-2">
           <GoogleLoginButton />
-          <GithubLoginButton />
         </div>
       </DialogContent>
     </Dialog>
