@@ -30,7 +30,7 @@ export default async function Page() {
             ) : (
               <LoginModal>
                 <div className="bg-accent/70 hover:bg-accent text-accent-foreground w-full cursor-pointer rounded-full px-6 py-2 text-lg">
-                Vendez quelque chose ou posez une question.
+                  Vendez quelque chose ou posez une question.
                 </div>
               </LoginModal>
             )}

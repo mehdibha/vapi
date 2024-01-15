@@ -6,8 +6,7 @@ export const siteConfig = {
     name: "vapoter.tn",
     logo: "/images/logo.png",
     title: "vapoter.tn",
-    description:
-      "Première marketplace de vente de cigarettes électroniques en Tunisie.",
+    description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",
     keywords: [
       "Theme",
       "Theme customizer",
