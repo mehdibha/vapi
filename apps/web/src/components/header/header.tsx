@@ -4,11 +4,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useAnimate } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon } from "@vapotertn/ui";
+import {
+  Button,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  MenuIcon,
+  Input,
+} from "@vapotertn/ui";
 import { cn } from "@vapotertn/utils";
-import { useScroll } from "@/hooks/use-scroll";
 import { siteConfig } from "@/config";
 import { UserMenu } from "../user-menu";
 
@@ -20,125 +25,23 @@ interface HeaderProps {
 }
 
 export const Header = (props: HeaderProps) => {
-  const { children, cta } = props;
-
   const { data, status } = useSession();
-  const { scrolled } = useScroll();
-  const [refLogo, animate] = useAnimate();
-  const [refCTA] = useAnimate();
-
-  React.useEffect(() => {
-    animate(
-      refLogo.current,
-      {
-        x: scrolled ? -35 : -100,
-        opacity: scrolled ? 1 : 0,
-      },
-      { duration: 0.3 }
-    );
-    animate(
-      refCTA.current,
-      {
-        x: scrolled ? 120 : 180,
-        opacity: scrolled ? 1 : 0,
-      },
-      { duration: 0.3 }
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrolled]);
 
   return (
-    <header className="animate-in fade-in slide-in-from-top-2 pointer-events-none sticky top-0 z-50 w-full duration-500">
-      <div className="container relative flex h-16 items-center justify-between px-4 sm:px-8 ">
-        <div
-          className={cn("pointer-events-auto", {
-            "pointer-events-none": scrolled,
-          })}
-        >
-          <Link
-            href="/"
-            className={cn(
-              "mr-8 flex items-center space-x-2 transition-all duration-300 hover:opacity-80",
-              {
-                "translate-x-[-10px] opacity-0 hover:opacity-0": scrolled,
-              }
-            )}
-            suppressHydrationWarning
-          >
-            <Image
-              src={siteConfig.global.logo}
-              alt={siteConfig.global.name}
-              loading="lazy"
-              width={20}
-              height={20}
-            />
-            <span className="inline-block font-bold">{siteConfig.global.name}</span>
-          </Link>
-        </div>
-        <div
-          className={cn(
-            "pointer-events-auto absolute left-1/2 top-1/2 mr-8 hidden translate-x-[-50%] translate-y-[-50%] rounded-full bg-gray-300/0 px-3 py-[6px] backdrop-blur-md transition-all duration-300 lg:block",
-            {
-              "bg-gray-300/50 shadow-md dark:bg-gray-800/70": scrolled,
-            }
-          )}
-        >
-          <div className="overflow-hidden">
-            <div
-              suppressHydrationWarning
-              className={cn("relative transition-all duration-300", {
-                "ml-[40px] mr-[120px]": scrolled,
-              })}
-            >
-              <motion.div
-                ref={refLogo}
-                className="absolute"
-                initial={{ x: -100, y: 4, opacity: 0 }}
-              >
-                <Link href="/">
-                  <Image
-                    src={siteConfig.global.logo}
-                    alt={siteConfig.global.name}
-                    loading="lazy"
-                    width={20}
-                    height={20}
-                    className="aspect-[auto 30 / 30] object-cover"
-                  />
-                </Link>
-              </motion.div>
-              <Nav items={config.nav.links} />
-              <motion.div
-                ref={refCTA}
-                className="absolute right-0"
-                initial={{ x: 0, y: -28, opacity: 0 }}
-              >
-                <Button href={config.cta.primary.href} size="sm" color="primary">
-                  {config.cta.primary.label}
-                </Button>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-        <div
-          suppressHydrationWarning
-          className={cn(
-            "pointer-events-auto hidden items-center space-x-4 transition-all duration-300 lg:flex",
-            {
-              "pointer-events-none translate-x-[10px] opacity-0": scrolled,
-            }
-          )}
-        >
-          <div className="flex items-center space-x-2">
-            {status === "unauthenticated" && (
-              <Button href={config.cta.secondary.href} variant="text" size="sm">
-                {config.cta.secondary.label}
-              </Button>
-            )}
-            <Button href={config.cta.primary.href} color="primary" size="sm">
-              {config.cta.primary.label}
+    <header className="bg-background sticky top-0 z-50 shadow-sm">
+      <div className="container flex h-12 items-center justify-between py-2">
+        <span className="font-bold">Vapoter.tn</span>
+        <Input
+          placeholder="Rechercher sur vapoter.tn"
+          className="max-w-[400px] bg-white"
+        />
+        <div>
+          {status === "unauthenticated" && (
+            <Button href="/login" color="primary" size="sm">
+              Login
             </Button>
-          </div>
-          {status === "authenticated" && data.user && <UserMenu user={data.user} />}
+          )}
+          {status === "authenticated" && <UserMenu user={data.user} />}
         </div>
         <MobileNav />
       </div>

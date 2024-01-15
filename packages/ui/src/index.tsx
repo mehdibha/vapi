@@ -27,6 +27,7 @@ export * from "./components/avatar";
 export * from "./components/menu";
 export * from "./components/tabs";
 export * from "./components/card";
+export * from "./components/carousel"
 
 // hooks
 export * from "./hooks/use-toast";

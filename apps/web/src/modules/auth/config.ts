@@ -9,19 +9,19 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 export const authOptions: NextAuthOptions = {
   // debug: true,
   providers: [
-    GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID as string,
-      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
-      profile(profile) {
-        return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          gh_username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
-        };
-      },
-    }),
+    // GitHubProvider({
+    //   clientId: process.env.AUTH_GITHUB_ID as string,
+    //   clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+    //   profile(profile) {
+    //     return {
+    //       id: profile.id.toString(),
+    //       name: profile.name || profile.login,
+    //       gh_username: profile.login,
+    //       email: profile.email,
+    //       image: profile.avatar_url,
+    //     };
+    //   },
+    // }),
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET as string,

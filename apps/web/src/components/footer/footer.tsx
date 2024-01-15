@@ -31,7 +31,7 @@ export const Footer = async () => {
       <div className="container mt-36 pb-8">
         <Separator className="mb-4" />
         <div>
-          <p>Copyright © 2023 vapotertn Inc. All rights reserved.</p>
+          <p>Copyright © 2023 vapoter.tn</p>
           <div className="mt-4 flex justify-end ">
             <div className="flex h-5 items-center space-x-2">
               <div className="flex space-x-1">

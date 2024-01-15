@@ -51,4 +51,7 @@ export {
   MoreVertical as MoreVerticalIcon,
   Heart as HeartIcon,
   Command as CommandIcon,
+  PlusCircle as PlusCircleIcon,
+  Plus as PlusIcon,
+  Camera as CameraIcon,
 } from "lucide-react";

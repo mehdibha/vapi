@@ -15,7 +15,6 @@ export default function LoginPage() {
       </Suspense>
       <div className="mt-8 flex flex-col gap-2">
         <GoogleLoginButton />
-        <GithubLoginButton />
       </div>
     </div>
   );
