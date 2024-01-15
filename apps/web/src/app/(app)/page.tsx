@@ -23,13 +23,13 @@ export default async function Page() {
             </Avatar>
             {session?.user ? (
               <CreatePostModal>
-                <div className="bg-accent/70 hover:bg-accent border text-accent-foreground w-full cursor-pointer rounded-full px-6 py-2 text-lg">
+                <div className="bg-muted/50 hover:bg-muted border text-muted-foreground w-full cursor-pointer rounded-full px-6 py-2">
                   Vendez quelque chose ou posez une question.
                 </div>
               </CreatePostModal>
             ) : (
               <LoginModal>
-                <div className="bg-accent/70 hover:bg-accent border text-accent-foreground w-full cursor-pointer rounded-full px-6 py-2 text-lg">
+                <div className="bg-muted/50 hover:bg-muted border text-muted-foreground w-full cursor-pointer rounded-full px-6 py-2">
                   Vendez quelque chose ou posez une question.
                 </div>
               </LoginModal>
