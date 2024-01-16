@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 import { Button, MailIcon } from "@vapi/ui";
 import { cn } from "@vapi/utils";
-import { signIn } from "next-auth/react";
 
 interface EmailLoginButtonProps {
   className?: string;

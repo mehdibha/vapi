@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useOptimistic } from "react";
-import { Avatar, AvatarFallback, AvatarImage, Card, CardHeader } from "@vapi/ui";
 import { useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage, Card, CardHeader } from "@vapi/ui";
 import { LoginModal } from "@/modules/auth/components/login-modal";
 import { CreatePostModal } from "@/modules/posts/components/create-post-modal";
 import { PostCard } from "@/modules/posts/components/post-card";

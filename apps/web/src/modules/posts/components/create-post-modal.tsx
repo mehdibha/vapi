@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
 import {
   Avatar,
   AvatarFallback,
@@ -26,8 +28,6 @@ import {
   TooltipTrigger,
   useToast,
 } from "@vapi/ui";
-import { useSession } from "next-auth/react";
-import { useForm } from "react-hook-form";
 import { Post } from "@/types";
 import { createPost } from "../actions";
 

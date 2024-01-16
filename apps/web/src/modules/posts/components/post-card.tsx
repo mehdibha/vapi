@@ -2,6 +2,8 @@
 
 import React, { useOptimistic } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
 import {
   Avatar,
   AvatarFallback,
@@ -23,8 +25,6 @@ import {
   Separator,
 } from "@vapi/ui";
 import { formatRelativeTime } from "@vapi/utils";
-import { useSession } from "next-auth/react";
-import { useForm } from "react-hook-form";
 import { Comment, Post } from "@/types";
 import { addCommentToPost } from "../actions";
 
