@@ -1,4 +1,4 @@
-import { Button } from "@vapotertn/ui";
+import { Button } from "@vapi/ui";
 
 export default function NotFound() {
   return (

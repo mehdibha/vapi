@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { VerifiedIcon } from "@vapotertn/ui";
-import { cn, stringReplace } from "@vapotertn/utils";
+import { VerifiedIcon } from "@vapi/ui";
+import { cn, stringReplace } from "@vapi/utils";
 
 interface TestimonialProps {
   headline: string;

@@ -1,1 +1,1 @@
-export * from "@vapotertn/database";
+export * from "@vapi/database";

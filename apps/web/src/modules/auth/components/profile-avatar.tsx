@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@vapotertn/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@vapi/ui";
 
 interface ProfileAvatarProps {
   user?: {

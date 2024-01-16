@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["@vapotertn/eslint-config/basic"],
+  extends: ["@vapi/eslint-config/basic"],
 };

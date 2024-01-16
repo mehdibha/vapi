@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, XIcon } from "@vapotertn/ui";
+import { Button, XIcon } from "@vapi/ui";
 
 export const Banner = () => {
   const [displayed, setDisplayed] = React.useState(true);
@@ -37,9 +37,9 @@ export const Banner = () => {
       </div>
       <p className="text-sm leading-6">
         <span className="mr-2">
-          <strong className="font-semibold">vapotertn •</strong> Warning This app is a
-          work in progress. I&apos;m building this in public. You can follow the progress
-          on Twitter @mehdibha_. See the roadmap below.
+          <strong className="font-semibold">vapi •</strong> Warning This app is a work in
+          progress. I&apos;m building this in public. You can follow the progress on
+          Twitter @mehdibha_. See the roadmap below.
         </span>
         <Button size="sm" color="primary">
           Join waitlist

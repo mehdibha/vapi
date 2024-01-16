@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import {
   Button,
   DropdownMenu,
@@ -14,7 +13,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
   LogOutIcon,
-} from "@vapotertn/ui";
+} from "@vapi/ui";
+import { signOut } from "next-auth/react";
 import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
 
 interface UserMenuProps {

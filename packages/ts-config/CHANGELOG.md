@@ -1,4 +1,4 @@
-# @vapotertn/ts-config
+# @vapi/ts-config
 
 ## 0.1.0
 

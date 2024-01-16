@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { cn } from "@vapi/utils";
 import { X } from "lucide-react";
-import { cn } from "@vapotertn/utils";
 
 const Dialog = DialogPrimitive.Root;
 

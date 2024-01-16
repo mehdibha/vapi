@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@vapotertn/ui";
-import { cn, stringReplace } from "@vapotertn/utils";
+import { Button } from "@vapi/ui";
+import { cn, stringReplace } from "@vapi/utils";
 import styles from "./styles.module.css";
 
 type company = {
@@ -64,13 +64,13 @@ export const Hero = (props: HeroProps) => {
       </div>
       <div className="flex justify-center">
         <Link
-          href="https://www.producthunt.com/posts/vapotertn?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-vapotertn"
+          href="https://www.producthunt.com/posts/vapi?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-vapi"
           target="_blank"
           className="mt-8"
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=434268&theme=light"
-            alt="vapotertn - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt"
+            alt="vapi - Never&#0032;struggle&#0032;again&#0032;with&#0032;your&#0032;site&#0032;theme | Product Hunt"
             style={{ width: "250px", height: "54px" }}
             width="250"
             height="54"

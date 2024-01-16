@@ -2,10 +2,10 @@ import { APP_URL } from "./constants";
 
 export const siteConfig = {
   global: {
-    url: "https://vapotertn.co",
-    name: "vapoter.tn",
+    url: "https://vapi.co",
+    name: "vapi.tn",
     logo: "/images/logo.png",
-    title: "vapoter.tn",
+    title: "vapi.tn",
     description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",
     keywords: [
       "Theme",
@@ -60,10 +60,10 @@ export const siteConfig = {
     hero: {
       headline: "Get an instant **preview**\n for your theme",
       subheadline:
-        "Get an instant preview for your theme with vapotertn. Export your theme in one click.",
+        "Get an instant preview for your theme with vapi. Export your theme in one click.",
       cta: [
         { label: "Go to playground", href: "/playground" },
-        { label: "Star on GitHub", href: "https://github.com/mehdibha/vapotertn" },
+        { label: "Star on GitHub", href: "https://github.com/mehdibha/vapi" },
       ],
       demoVideo: {
         src: null,
@@ -134,17 +134,17 @@ export const siteConfig = {
     },
     cta: {
       headline: "Proudly **open source**",
-      subheadline: "vapotertn is open source and available on GitHub",
+      subheadline: "vapi is open source and available on GitHub",
       cta: {
         label: "Star on GitHub",
-        href: "https://github.com/mehdibha/vapotertn",
+        href: "https://github.com/mehdibha/vapi",
       },
     },
   },
   pricingPage: {
     headline: "Simple pricing.",
     subheadline:
-      "Use vapotertn for free. Upgrade to enable custom domains and more advanced features.",
+      "Use vapi for free. Upgrade to enable custom domains and more advanced features.",
     pricingPlans: [
       {
         name: "Free",
@@ -152,9 +152,9 @@ export const siteConfig = {
         description: "Good for getting started.",
         href: APP_URL,
         features: [
-          "Free hosting on 'vapotertn.co'",
+          "Free hosting on 'vapi.co'",
           "Optimized SEO",
-          "Has 'Built with vapotertn' branding",
+          "Has 'Built with vapi' branding",
         ],
       },
       {
@@ -167,7 +167,7 @@ export const siteConfig = {
         features: [
           "Everything in Free.",
           "Basic analytics",
-          "Remove 'Built with vapotertn' branding",
+          "Remove 'Built with vapi' branding",
         ],
       },
       {
@@ -185,31 +185,31 @@ export const siteConfig = {
     ],
     faq: [
       {
-        question: "How does vapotertn works?",
+        question: "How does vapi works?",
         answer:
-          "vapotertn is a monorepo starter that comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more. It's a great way to start your next project.",
+          "vapi is a monorepo starter that comes with Next.js, Tailwind CSS, Shadcn-ui, Server components, and more. It's a great way to start your next project.",
       },
       {
-        question: "How do I create a website with vapotertn?",
-        answer: "You can create a website with vapotertn by following the documentation.",
+        question: "How do I create a website with vapi?",
+        answer: "You can create a website with vapi by following the documentation.",
       },
       {
-        question: "How much does vapotertn cost?",
-        answer: "It's free to use vapotertn",
+        question: "How much does vapi cost?",
+        answer: "It's free to use vapi",
       },
       {
-        question: "Can I use vapotertn for free?",
-        answer: "Yes, you can use vapotertn for free.",
+        question: "Can I use vapi for free?",
+        answer: "Yes, you can use vapi for free.",
       },
     ],
     cta: {
       headline: "Proudly **open-source**",
-      subheadline: "vapotertn is open source and available on GitHub",
-      cta: { label: "Star on GitHub", href: "https://github.com/mehdibha/vapotertn" },
+      subheadline: "vapi is open source and available on GitHub",
+      cta: { label: "Star on GitHub", href: "https://github.com/mehdibha/vapi" },
     },
   },
   blogPage: {
     headline: "Blog",
-    subheadline: "Learn more about vapotertn and write your posts with MDX.",
+    subheadline: "Learn more about vapi and write your posts with MDX.",
   },
 };

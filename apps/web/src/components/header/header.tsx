@@ -5,15 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import {
-  Button,
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  MenuIcon,
-  Input,
-} from "@vapotertn/ui";
-import { cn } from "@vapotertn/utils";
+import { Button, Sheet, SheetContent, SheetTrigger, MenuIcon, Input } from "@vapi/ui";
+import { cn } from "@vapi/utils";
 import { siteConfig } from "@/config";
 import { UserMenu } from "../user-menu";
 
@@ -38,10 +31,7 @@ export const Header = () => {
           /> */}
           <span className="inline-block font-bold">{siteConfig.global.name}</span>
         </Link>
-        <Input
-          placeholder="Rechercher sur vapoter.tn"
-          className="max-w-[400px] bg-white"
-        />
+        <Input placeholder="Rechercher sur vapi.tn" className="max-w-[400px] bg-white" />
         <div className="flex w-[200px] justify-end">
           {status === "unauthenticated" && (
             <Button href="/login" color="secondary" size="sm">

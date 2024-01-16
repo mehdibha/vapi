@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@vapotertn/utils";
+import { cn } from "@vapi/utils";
 
 interface AppPageLayoutProps {
   title: string;

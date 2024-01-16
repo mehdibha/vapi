@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@vapotertn/ui";
+import { Badge } from "@vapi/ui";
 import { TagsSelect } from "./tags-select";
 
 interface SitesGridProps {

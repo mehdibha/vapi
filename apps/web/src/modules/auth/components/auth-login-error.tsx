@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { Alert, AlertDescription } from "@vapotertn/ui";
+import { Alert, AlertDescription } from "@vapi/ui";
 
 interface AuthLoginProps {
   className: string;

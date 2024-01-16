@@ -9,7 +9,7 @@
   },
   "rsc": false,
   "aliases": {
-    "utils": "@vapotertn/utils",
+    "utils": "@vapi/utils",
     "components": "src/components"
   }
 }

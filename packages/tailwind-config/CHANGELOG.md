@@ -1,4 +1,4 @@
-# @vapotertn/tailwind-config
+# @vapi/tailwind-config
 
 ## 0.1.1
 

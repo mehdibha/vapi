@@ -1,4 +1,4 @@
-import { cn } from "@vapotertn/utils";
+import { cn } from "@vapi/utils";
 
 interface FormCardLayoutProps extends React.ButtonHTMLAttributes<HTMLFormElement> {
   title: string;

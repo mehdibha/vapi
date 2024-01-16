@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Badge } from "@vapotertn/ui";
-import { cn } from "@vapotertn/utils";
+import { Badge } from "@vapi/ui";
+import { cn } from "@vapi/utils";
 
 interface TagsSelectProps {
   tags: string[];

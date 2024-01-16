@@ -1,5 +1,5 @@
 {
-  "name": "@vapotertn/ui",
+  "name": "@vapi/ui",
   "version": "0.1.2",
   "sideEffects": [
     "**/*.css"
@@ -47,16 +47,16 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@vapotertn/utils": "*",
+    "@vapi/utils": "*",
     "cmdk": "^0.2.0",
     "embla-carousel-react": "^8.0.0-rc18",
     "lucide-react": "^0.292.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.5",
-    "@vapotertn/eslint-config": "*",
-    "@vapotertn/tailwind-config": "*",
-    "@vapotertn/ts-config": "*",
+    "@vapi/eslint-config": "*",
+    "@vapi/tailwind-config": "*",
+    "@vapi/ts-config": "*",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "react": "^18.2.0",

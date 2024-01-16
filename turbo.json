@@ -21,7 +21,7 @@
   ],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "@vapotertn/database#db:generate"],
+      "dependsOn": ["^build", "@vapi/database#db:generate"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "lint": {
@@ -29,7 +29,7 @@
     },
     "typecheck": { "dependsOn": ["^build"], "cache": false },
     "dev": {
-      "dependsOn": ["^build", "@vapotertn/database#db:generate"],
+      "dependsOn": ["^build", "@vapi/database#db:generate"],
       "cache": false
     },
     "clean": {

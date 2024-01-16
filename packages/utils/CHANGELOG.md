@@ -1,4 +1,4 @@
-# @vapotertn/utils
+# @vapi/utils
 
 ## 0.1.1
 

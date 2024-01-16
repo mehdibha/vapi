@@ -1,5 +1,5 @@
 {
-  "extends": "@vapotertn/ts-config/nextjs.json",
+  "extends": "@vapi/ts-config/nextjs.json",
   "compilerOptions": {
     "plugins": [
       {

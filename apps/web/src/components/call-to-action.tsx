@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { Button } from "@vapotertn/ui";
-import { cn, stringReplace } from "@vapotertn/utils";
+import { Button } from "@vapi/ui";
+import { cn, stringReplace } from "@vapi/utils";
 import { siteConfig } from "@/config";
 
 interface CallToActionProps {

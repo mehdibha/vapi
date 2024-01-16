@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@vapotertn/database";
+import { prisma } from "@vapi/database";
 import { getSession } from "@/modules/auth/services";
 
 interface CreatePostData {
@@ -12,7 +12,9 @@ export const createPost = async (data: CreatePostData) => {
   const session = await getSession();
 
   if (!session) {
-    throw new Error("Unauthorized");
+    return {
+      error: "You must be logged in to create a post",
+    };
   }
 
   const post = await prisma.post.create({
@@ -27,5 +29,38 @@ export const createPost = async (data: CreatePostData) => {
     },
   });
 
-  return post;
+  return { post, success: true };
+};
+
+interface AddCommentToPostData {
+  message: string;
+  postId: string;
+}
+
+export const addCommentToPost = async (data: AddCommentToPostData) => {
+  const session = await getSession();
+
+  if (!session) {
+    return {
+      error: "You must be logged in to create a post",
+    };
+  }
+
+  const post = await prisma.comment.create({
+    data: {
+      message: data.message,
+      author: {
+        connect: {
+          id: session.user.id,
+        },
+      },
+      post: {
+        connect: {
+          id: data.postId,
+        },
+      },
+    },
+  });
+
+  return { post, success: true };
 };

@@ -1,4 +1,4 @@
-import { cn } from "@vapotertn/utils";
+import { cn } from "@vapi/utils";
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (

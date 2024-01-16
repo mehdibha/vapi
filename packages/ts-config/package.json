@@ -1,5 +1,5 @@
 {
-  "name": "@vapotertn/ts-config",
+  "name": "@vapi/ts-config",
   "version": "0.1.0",
   "license": "MIT",
   "publishConfig": {

@@ -1,5 +1,5 @@
 {
-  "extends": "@vapotertn/ts-config/react-library.json",
+  "extends": "@vapi/ts-config/react-library.json",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

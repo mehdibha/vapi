@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import { Button } from "@vapi/ui";
+import { MoonIcon, SunIcon } from "@vapi/ui";
 import { useTheme } from "next-themes";
-import { Button } from "@vapotertn/ui";
-import { MoonIcon, SunIcon } from "@vapotertn/ui";
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();

@@ -16,5 +16,5 @@ module.exports = {
     ],
   },
   reactStrictMode: false,
-  transpilePackages: ["@vapotertn/ui", "@vapotertn/utils", "@vapotertn/database"],
+  transpilePackages: ["@vapi/ui", "@vapi/utils", "@vapi/database"],
 };

@@ -1,8 +1,9 @@
-import { prisma } from "@vapotertn/database";
+import type { PostWithCommentsAndAuthor } from "@vapi/database";
+import { prisma } from "@vapi/database";
 
 export const getFeedPosts = async () => {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
+  const posts: PostWithCommentsAndAuthor[] = await prisma.post.findMany({
+    // where: { published: true },
     include: {
       author: true,
       comments: {

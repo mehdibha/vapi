@@ -1,4 +1,4 @@
-# @vapotertn/eslint-config
+# @vapi/eslint-config
 
 ## 0.1.2
 

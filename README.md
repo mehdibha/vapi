@@ -6,20 +6,20 @@
 
 <br/>
 <div align="center">
-  <a href="https://github.com/mehdibha/vapotertn">
-    <img src="https://vapotertn.co/images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/mehdibha/vapi">
+    <img src="https://vapi.co/images/logo.png" alt="Logo" width="80" height="80">
   </a>
-  <h1 align="center">vapoter.tn</h1>
+  <h1 align="center">vapi.tn</h1>
   <p align="center">
     A marketplace for vape products
   </p>
   <p>
     
-   <a href="https://vapoter.tn">Visit site</a>
+   <a href="https://vapi.tn">Visit site</a>
     ·
-    <a href="https://github.com/mehdibha/vapotertn/issues">Report Bug</a>
+    <a href="https://github.com/mehdibha/vapi/issues">Report Bug</a>
     ·
-    <a href="https://github.com/mehdibha/vapotertn/issues">Request Feature</a>
+    <a href="https://github.com/mehdibha/vapi/issues">Request Feature</a>
   </p>
 </div>
 
@@ -49,7 +49,7 @@
   <br>
   <div align="center">
     <figure>
-      <img src="/images/home-page.jpg" alt="vapotertn themes" width="600">
+      <img src="/images/home-page.jpg" alt="vapi themes" width="600">
       <div>
         <figcaption>Home page</figcaption>
       </div>
@@ -74,7 +74,7 @@
 
 ## Contributing
 
-See the [contribution guide](CONTRIBUTING.md) and join our amazing list of [contributors](https://github.com/mehdibha/vapotertn/graphs/contributors)!
+See the [contribution guide](CONTRIBUTING.md) and join our amazing list of [contributors](https://github.com/mehdibha/vapi/graphs/contributors)!
 
 <!-- LICENSE -->
 
@@ -88,13 +88,13 @@ Distributed under the MIT License. See `LICENSE` for more information.
   <td align="center"><a href="https://github.com/mehdibha"><img src="https://github.com/mehdibha.png" width="64px;"alt="Mehdi BHA"/><br/><sub><b>Mehdi BHA</b></sub></a></td>
 </tr></table>
 
-[contributors-shield]: https://img.shields.io/github/contributors/mehdibha/vapotertn.svg?style=for-the-badge
-[contributors-url]: https://github.com/mehdibha/vapotertn/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/mehdibha/vapotertn.svg?style=for-the-badge
-[forks-url]: https://github.com/mehdibha/vapotertn.svg/network/members
-[stars-shield]: https://img.shields.io/github/stars/mehdibha/vapotertn.svg?style=for-the-badge
-[stars-url]: https://github.com/mehdibha/vapotertn.svg/stargazers
-[issues-shield]: https://img.shields.io/github/issues/mehdibha/vapotertn.svg?style=for-the-badge
-[issues-url]: https://github.com/mehdibha/vapotertn.svg/issues
-[license-shield]: https://img.shields.io/github/license/mehdibha/vapotertn.svg?style=for-the-badge
-[license-url]: https://github.com/mehdibha/vapotertn.svg/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/mehdibha/vapi.svg?style=for-the-badge
+[contributors-url]: https://github.com/mehdibha/vapi/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/mehdibha/vapi.svg?style=for-the-badge
+[forks-url]: https://github.com/mehdibha/vapi.svg/network/members
+[stars-shield]: https://img.shields.io/github/stars/mehdibha/vapi.svg?style=for-the-badge
+[stars-url]: https://github.com/mehdibha/vapi.svg/stargazers
+[issues-shield]: https://img.shields.io/github/issues/mehdibha/vapi.svg?style=for-the-badge
+[issues-url]: https://github.com/mehdibha/vapi.svg/issues
+[license-shield]: https://img.shields.io/github/license/mehdibha/vapi.svg?style=for-the-badge
+[license-url]: https://github.com/mehdibha/vapi.svg/blob/master/LICENSE.txt

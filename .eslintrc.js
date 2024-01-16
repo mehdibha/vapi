@@ -1,1 +1,1 @@
-module.exports = require("@vapotertn/eslint-config/basic");
+module.exports = require("@vapi/eslint-config/basic");

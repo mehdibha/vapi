@@ -1,5 +1,5 @@
 {
-  "name": "@vapotertn/eslint-config",
+  "name": "@vapi/eslint-config",
   "license": "MIT",
   "version": "0.1.2",
   "publishConfig": {

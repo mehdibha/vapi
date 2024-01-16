@@ -1,6 +1,6 @@
 import * as React from "react";
-import type { VariantProps } from "@vapotertn/utils";
-import { cn, cva } from "@vapotertn/utils";
+import type { VariantProps } from "@vapi/utils";
+import { cn, cva } from "@vapi/utils";
 
 const badgeVariants = cva("flex items-center rounded-full text-xs font-medium border", {
   variants: {

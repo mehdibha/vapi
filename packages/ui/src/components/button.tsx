@@ -1,8 +1,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { Slot } from "@radix-ui/react-slot";
+import { cn, type VariantProps, cva } from "@vapi/utils";
 import type { LucideIcon } from "lucide-react";
-import { cn, type VariantProps, cva } from "@vapotertn/utils";
 import { LoadingDots } from "./loading-dots";
 
 const buttonVariants = cva(

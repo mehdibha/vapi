@@ -1,6 +1,6 @@
 import * as React from "react";
-import { type VariantProps, cva } from "@vapotertn/utils";
-import { cn } from "@vapotertn/utils";
+import { type VariantProps, cva } from "@vapi/utils";
+import { cn } from "@vapi/utils";
 
 const alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",

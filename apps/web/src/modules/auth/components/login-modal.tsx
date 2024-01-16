@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogTitle,
   DialogContent,
-} from "@vapotertn/ui";
+} from "@vapi/ui";
 import { GoogleLoginButton } from "./google-login-button";
 
 interface LoginModalProps {

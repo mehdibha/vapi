@@ -1,8 +1,8 @@
 import React from "react";
 import { Metadata, Viewport } from "next";
+import "@vapi/ui/styles/shared-globals.css";
+import { cn } from "@vapi/utils";
 import { Analytics } from "@vercel/analytics/react";
-import "@vapotertn/ui/styles/shared-globals.css";
-import { cn } from "@vapotertn/utils";
 import { display, inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config";

@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@vapotertn/database";
+import { prisma } from "@vapi/database";
 import { getSession } from "./services";
 
 export const updateUser = async (formData: FormData, _id: unknown, key: string) => {

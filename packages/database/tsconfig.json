@@ -1,5 +1,5 @@
 {
-  "extends": "@vapotertn/ts-config/base.json",
+  "extends": "@vapi/ts-config/base.json",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tsup.config.ts"],
   "exclude": ["node_modules"]
 }

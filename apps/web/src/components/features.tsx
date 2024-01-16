@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { ArrowRightIcon, Badge, Button } from "@vapotertn/ui";
-import { cn, stringReplace } from "@vapotertn/utils";
+import { ArrowRightIcon, Badge, Button } from "@vapi/ui";
+import { cn, stringReplace } from "@vapi/utils";
 
 interface FeaturesProps {
   className?: string;

@@ -1,5 +1,5 @@
 {
-  "name": "@vapotertn/tailwind-config",
+  "name": "@vapi/tailwind-config",
   "version": "0.1.1",
   "main": "index.ts",
   "sideEffects": false,
