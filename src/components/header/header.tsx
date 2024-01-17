@@ -8,6 +8,7 @@ import { cn } from "@/utils/classes";
 import { siteConfig } from "@/config";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
+import { HeaderMenu } from "./menu";
 
 export const Header = () => {
   const { status } = useSession();
@@ -24,11 +25,17 @@ export const Header = () => {
         <Nav items={siteConfig.header.nav.links} />
         <div className="flex w-[200px] justify-end">
           {status === "unauthenticated" && (
-            <Button color="secondary" size="sm">
-              Se connecter
+            <Button asChild size="sm">
+              <Link href="/login">Se connecter</Link>
             </Button>
           )}
-          {status === "authenticated" && <UserAvatar />}
+          {status === "authenticated" && (
+            <HeaderMenu>
+              <Button variant="ghost" size="icon">
+                <UserAvatar />
+              </Button>
+            </HeaderMenu>
+          )}
         </div>
       </div>
     </header>

@@ -66,7 +66,7 @@
 
 ## Roadmap
 
-- [X] Site structure
+- [x] Site structure
 - [ ] Home page
 
 <!-- CONTRIBUTING -->

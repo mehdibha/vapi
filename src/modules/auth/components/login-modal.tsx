@@ -32,7 +32,7 @@ export const LoginModal = (props: LoginModalProps) => {
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 space-y-2">
-          <GoogleLoginButton />
+          <GoogleLoginButton className="w-full" />
         </div>
       </DialogContent>
     </Dialog>

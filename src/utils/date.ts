@@ -6,6 +6,6 @@ export const formatRelativeTime = (date: Date): string => {
     locale: fr,
     addSuffix: true,
   });
-  
+
   return formattedDate;
 };

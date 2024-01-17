@@ -20,9 +20,7 @@ export const siteConfig = {
   },
   header: {
     nav: {
-      links: [
-        { href: "/", label: "communauté" },
-      ],
+      links: [{ href: "/", label: "Communauté" }],
     },
     cta: {
       primary: {

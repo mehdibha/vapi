@@ -4,10 +4,9 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
-interface GithubLoginButtonProps {
-  className?: string;
-}
-export const GoogleLoginButton = (props: GithubLoginButtonProps) => {
+type GoogleLoginButtonProps = React.HTMLAttributes<HTMLElement>;
+
+export const GoogleLoginButton = (props: GoogleLoginButtonProps) => {
   return (
     <Button
       variant="secondary"
