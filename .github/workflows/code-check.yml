@@ -6,14 +6,13 @@ on:
 jobs:
   lint:
     env:
-      POSTGRES_PRISMA_URL:
-      POSTGRES_URL_NON_POOLING:
-      NODE_ENV:
-      NEXTAUTH_SECRET:
-      NEXTAUTH_URL:
-      AUTH_GOOGLE_CLIENT_ID:
-      AUTH_GOOGLE_CLIENT_SECRET:
-      NEXT_PUBLIC_ROOT_DOMAIN:
+      POSTGRES_PRISMA_URL: postgres://default.postgres-storage.com/
+      POSTGRES_URL_NON_POOLING: postgres://default.postgres-storage.com/verceldb
+      NEXTAUTH_SECRET: secret
+      NEXTAUTH_URL: local
+      AUTH_GOOGLE_CLIENT_ID: clientid
+      AUTH_GOOGLE_CLIENT_SECRET: secret
+      NEXT_PUBLIC_ROOT_DOMAIN: vapi.tn
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
