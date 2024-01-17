@@ -9,7 +9,7 @@ jobs:
       POSTGRES_PRISMA_URL: postgres://default.postgres-storage.com/
       POSTGRES_URL_NON_POOLING: postgres://default.postgres-storage.com/verceldb
       NEXTAUTH_SECRET: secret
-      NEXTAUTH_URL: local
+      NEXTAUTH_URL: http://localhost:3000
       AUTH_GOOGLE_CLIENT_ID: clientid
       AUTH_GOOGLE_CLIENT_SECRET: secret
       NEXT_PUBLIC_ROOT_DOMAIN: vapi.tn
