@@ -5,6 +5,15 @@ on:
 
 jobs:
   lint:
+    env:
+      POSTGRES_PRISMA_URL:
+      POSTGRES_URL_NON_POOLING:
+      NODE_ENV:
+      NEXTAUTH_SECRET:
+      NEXTAUTH_URL:
+      AUTH_GOOGLE_CLIENT_ID:
+      AUTH_GOOGLE_CLIENT_SECRET:
+      NEXT_PUBLIC_ROOT_DOMAIN:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,7 +21,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-          
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
