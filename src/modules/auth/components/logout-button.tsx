@@ -6,7 +6,7 @@
 // import { cn } from "@/utils/classes";
 
 export const LogoutButton = () => {
-  return null
+  return null;
   // const { className, ...restProps } = props;
 
   // return (

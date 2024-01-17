@@ -17,7 +17,7 @@
 // }
 
 export const Feed = () => {
-  return null
+  return null;
   // const { posts } = props;
 
   // return (

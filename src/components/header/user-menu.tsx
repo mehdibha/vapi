@@ -14,6 +14,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/menu";
+
 // import { ProfileAvatar } from "@/modules/auth/components/profile-avatar";
 
 interface UserMenuProps {

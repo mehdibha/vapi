@@ -1,7 +1,6 @@
 import * as React from "react";
 import { type VariantProps, cva, cn } from "@/utils/classes";
 
-
 const badgeVariants = cva("flex items-center rounded-full text-xs font-medium border", {
   variants: {
     color: {
