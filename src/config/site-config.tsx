@@ -5,15 +5,7 @@ export const siteConfig = {
     logo: "/images/logo.png",
     title: "vapi.tn",
     description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",
-    keywords: [
-      "Theme",
-      "Theme customizer",
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "Shadcn-ui",
-      "Server components",
-    ],
+    keywords: [],
     authors: [
       {
         name: "mehdibha",
@@ -29,8 +21,7 @@ export const siteConfig = {
   header: {
     nav: {
       links: [
-        { href: "/themes", label: "Themes" },
-        { href: "/blog", label: "Blog" },
+        { href: "/", label: "communauté" },
       ],
     },
     cta: {

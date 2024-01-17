@@ -1,10 +1,6 @@
-"use client";
-
 import React from "react";
-import { useSession } from "next-auth/react";
+import { Feed } from "@/modules/posts/components/feed";
 
 export default function HomePage() {
-  const { data } = useSession();
-
-  return <div>{data?.user.name}</div>;
+  return <Feed />;
 }
