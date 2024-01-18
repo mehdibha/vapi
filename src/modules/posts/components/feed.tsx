@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
+import { PostCardSkeleton } from "./post-card-skeleton";
 import { SearchInput } from "./search-input";
 
 export const Feed = () => {
   const [search, setSearch] = React.useState("");
   const { data: posts, isLoading } = api.post.getLatest.useQuery({ search });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (!posts) return <div>Posts not found</div>;
 
   return (
     <div className="mx-auto w-full max-w-3xl space-y-4 px-4 sm:px-8">
@@ -22,7 +21,9 @@ export const Feed = () => {
         containerProps={{ className: "w-[500px] max-w-[100%] mx-auto" }}
       />
       <CreatePostCard />
-      {posts.map((post, index) => {
+      {isLoading &&
+        Array.from({ length: 10 }).map((_, index) => <PostCardSkeleton key={index} />)}
+      {posts?.map((post, index) => {
         return (
           <PostCard
             key={index}
