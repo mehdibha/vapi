@@ -1,7 +1,9 @@
 "use client";
 
-import React, { KeyboardEvent } from "react";
-import { useForm } from "react-hook-form";
+import React, { type KeyboardEvent } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -11,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { formatRelativeTime } from "@/utils/date";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
+import { api } from "@/trpc/react";
 
 interface PostCardProps {
   postId: string | null;
@@ -30,21 +33,84 @@ interface PostCardProps {
   }[];
 }
 
+const addCommentSchema = z.object({
+  message: z.string().min(1),
+});
+
+type AddCommentSchemaType = z.infer<typeof addCommentSchema>;
+
 export const PostCard = (props: PostCardProps) => {
   const { postId, author, createdAt, content, images, comments } = props;
 
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-  const { status } = useSession();
-  const form = useForm({
+  const { status, data } = useSession();
+
+  const form = useForm<AddCommentSchemaType>({
     defaultValues: {
       message: "",
     },
+    resolver: zodResolver(addCommentSchema),
   });
 
-  function onSubmit() {
-    console.log("commenting");
-    form.reset();
-  }
+  const utils = api.useUtils();
+  const addComment = api.comments.add.useMutation({
+    onMutate: async (newComment) => {
+      await utils.post.getLatest.cancel();
+      const previousComents = utils.post.getLatest
+        .getData()
+        ?.find((post) => post.id === postId)?.comments;
+      // @ts-expect-error no id in newComment because it's an optimistic update
+      utils.post.getLatest.setData(undefined, (oldPosts) => {
+        if (!oldPosts) return oldPosts;
+        return oldPosts.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  message: newComment.message,
+                  author: {
+                    name: data?.user.name,
+                    image: data?.user.image,
+                  },
+                },
+              ],
+            };
+          }
+          return post;
+        });
+      });
+      form.reset();
+      return { previousComents };
+    },
+    onError: () => {
+      utils.post.getLatest.setData(undefined, (oldPosts) => {
+        if (!oldPosts) return oldPosts;
+        return oldPosts.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              comments: post.comments.filter((comment) => !!comment.id),
+            };
+          }
+          return post;
+        });
+      });
+    },
+    onSettled: async () => {
+      // TODO: optimize later
+      await utils.post.getLatest.invalidate();
+    },
+  });
+
+  const onSubmit: SubmitHandler<AddCommentSchemaType> = (values) => {
+    if (!postId) return;
+    addComment.mutate({
+      message: values.message,
+      postId: postId,
+    });
+  };
 
   const handleKeyDown = async (
     event: KeyboardEvent<HTMLTextAreaElement>
@@ -59,7 +125,10 @@ export const PostCard = (props: PostCardProps) => {
     <Card>
       <CardHeader>
         <div className="flex items-center space-x-4">
-          <UserAvatar />
+          <Avatar>
+            <AvatarImage src={author.avatar} alt={`${author.name}'s profile picture`} />
+            <AvatarFallback>{author.name[0]}</AvatarFallback>
+          </Avatar>
           <div>
             <p className="text-sm font-medium leading-none">{author.name}</p>
             <p className="text-xs text-muted-foreground">
@@ -82,7 +151,10 @@ export const PostCard = (props: PostCardProps) => {
           return (
             <div key={index} className="flex space-x-4">
               <Avatar>
-                <AvatarImage src={comment.author.avatar ?? undefined} alt="Image" />
+                <AvatarImage
+                  src={comment.author.avatar}
+                  alt={`${comment.author.name}'s profile picture`}
+                />
                 <AvatarFallback>{comment.author.name[0]}</AvatarFallback>
               </Avatar>
               <div>

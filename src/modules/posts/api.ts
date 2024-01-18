@@ -5,8 +5,6 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/
 export const postRouter = createTRPCRouter({
   getLatest: publicProcedure.query(({ ctx }) => {
     return ctx.db.post.findMany({
-      // where: { published: true },
-
       orderBy: { createdAt: "desc" },
       take: 10,
       select: {
@@ -21,7 +19,9 @@ export const postRouter = createTRPCRouter({
           },
         },
         comments: {
-          include: {
+          select: {
+            id: true,
+            message: true,
             author: {
               select: {
                 name: true,
@@ -44,10 +44,34 @@ export const postRouter = createTRPCRouter({
         },
       });
     }),
-  delete: protectedProcedure
-    .input(z.object({ id: z.string() }))
+  edit: protectedProcedure
+    .input(
+      z.object({
+        postId: z.string(),
+        content: z.string().min(1).optional(),
+        images: z.array(z.string().url()).optional(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
-      const post = await ctx.db.post.findUnique({ where: { id: input.id } });
+      const post = await ctx.db.post.findUnique({ where: { id: input.postId } });
+      if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
+      if (post.authorId !== ctx.session.user.id)
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You do not have permission to delete this post",
+        });
+      return ctx.db.post.update({
+        where: { id: input.postId },
+        data: {
+          content: input.content,
+          images: input.images,
+        },
+      });
+    }),
+  delete: protectedProcedure
+    .input(z.object({ postId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const post = await ctx.db.post.findUnique({ where: { id: input.postId } });
       if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
       if (post.authorId !== ctx.session.user.id)
         throw new TRPCError({
@@ -55,7 +79,7 @@ export const postRouter = createTRPCRouter({
           message: "You do not have permission to delete this post",
         });
       return ctx.db.post.delete({
-        where: { id: input.id },
+        where: { id: input.postId },
       });
     }),
 });

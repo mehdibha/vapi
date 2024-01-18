@@ -20,24 +20,24 @@ export const Feed = () => {
       <CreatePostCard />
       {posts.map((post, index) => {
         return (
-            <PostCard
-              key={index}
-              postId={post.id}
-              author={{
-                name: post.author.name,
-                avatar: post.author.image ?? undefined,
-              }}
-              createdAt={post.createdAt}
-              content={post.content}
-              images={post.images}
-              comments={post.comments.map((comment) => ({
-                message: comment.message,
-                author: {
-                  name: comment.author.name,
-                  avatar: comment.author.image ?? undefined,
-                },
-              }))}
-            />
+          <PostCard
+            key={index}
+            postId={post.id}
+            author={{
+              name: post.author.name,
+              avatar: post.author.image ?? undefined,
+            }}
+            createdAt={post.createdAt}
+            content={post.content}
+            images={post.images}
+            comments={post.comments.map((comment) => ({
+              message: comment.message,
+              author: {
+                name: comment.author.name,
+                avatar: comment.author.image ?? undefined,
+              },
+            }))}
+          />
         );
       })}
     </div>
