@@ -3,36 +3,46 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
-  getLatest: publicProcedure.query(({ ctx }) => {
-    return ctx.db.post.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 10,
-      select: {
-        id: true,
-        content: true,
-        images: true,
-        createdAt: true,
-        author: {
-          select: {
-            name: true,
-            image: true,
+  getLatest: publicProcedure
+    .input(z.object({ search: z.string().optional() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.post.findMany({
+        ...(input.search && {
+          where: {
+            content: {
+              contains: input.search,
+              mode: "insensitive",
+            },
           },
-        },
-        comments: {
-          select: {
-            id: true,
-            message: true,
-            author: {
-              select: {
-                name: true,
-                image: true,
+        }),
+        orderBy: { createdAt: "desc" },
+        take: 10,
+        select: {
+          id: true,
+          content: true,
+          images: true,
+          createdAt: true,
+          author: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+          comments: {
+            select: {
+              id: true,
+              message: true,
+              author: {
+                select: {
+                  name: true,
+                  image: true,
+                },
               },
             },
           },
         },
-      },
-    });
-  }),
+      });
+    }),
   create: protectedProcedure
     .input(z.object({ content: z.string().min(1), images: z.array(z.string().url()) }))
     .mutation(async ({ ctx, input }) => {

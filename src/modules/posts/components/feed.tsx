@@ -1,12 +1,14 @@
 "use client";
 
+import React from "react";
 import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
 import { SearchInput } from "./search-input";
 
 export const Feed = () => {
-  const { data: posts, isLoading } = api.post.getLatest.useQuery();
+  const [search, setSearch] = React.useState("");
+  const { data: posts, isLoading } = api.post.getLatest.useQuery({ search });
 
   if (isLoading) return <div>Loading...</div>;
   if (!posts) return <div>Posts not found</div>;
@@ -14,6 +16,8 @@ export const Feed = () => {
   return (
     <div className="mx-auto w-full max-w-3xl space-y-4 px-4 sm:px-8">
       <SearchInput
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="Rechercher sur vapi.tn"
         containerProps={{ className: "w-[500px] max-w-[100%] mx-auto" }}
       />
