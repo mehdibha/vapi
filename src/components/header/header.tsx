@@ -14,7 +14,7 @@ export const Header = () => {
   const { status } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background shadow-sm dark:bg-background dark:text-foreground">
+    <header className="sticky bg-card top-0 z-50 border-b shadow-sm dark:bg-background dark:text-foreground">
       <div className="container flex h-12 items-center justify-between py-2">
         <Link
           href="/"

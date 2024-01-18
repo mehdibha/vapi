@@ -10,7 +10,7 @@ generator client {
 
 model User {
     id            String    @id @default(cuid())
-    name          String?
+    name          String
     email         String?   @unique
     emailVerified DateTime?
     image         String?
@@ -67,8 +67,8 @@ model Post {
     content   String
     images    String[]
     published Boolean   @default(false)
-    author    User?     @relation(fields: [authorId], references: [id])
-    authorId  String?
+    author    User     @relation(fields: [authorId], references: [id])
+    authorId  String
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     comments  Comment[]
@@ -77,10 +77,10 @@ model Post {
 model Comment {
     id        String   @id @default(cuid())
     message   String
-    author    User?    @relation(fields: [authorId], references: [id])
-    authorId  String?
-    postId    String?
+    author    User     @relation(fields: [authorId], references: [id])
+    authorId  String
+    postId    String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    post      Post?    @relation(fields: [postId], references: [id])
+    post      Post    @relation(fields: [postId], references: [id])
 }

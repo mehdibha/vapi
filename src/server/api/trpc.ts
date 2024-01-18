@@ -9,7 +9,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { getServerAuthSession } from "@/modules/auth/config";
+import { getServerAuthSession } from "@/modules/auth/services";
 import { db } from "@/server/db";
 
 /**
@@ -87,7 +87,7 @@ export const publicProcedure = t.procedure;
  */
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "You must be logged in" });
   }
   return next({
     ctx: {

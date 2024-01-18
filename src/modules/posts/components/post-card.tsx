@@ -1,5 +1,6 @@
 "use client";
 
+import React, { KeyboardEvent } from "react";
 import { useForm } from "react-hook-form";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -9,31 +10,31 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { formatRelativeTime } from "@/utils/date";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
+import { useSession } from "@/modules/auth/hooks";
 
-export const PostCard = () => {
-  const post = {
-    postId: "1",
-    author: {
-      name: "John Doe",
-      avatar: "https://i.pravatar.cc/300?img=1",
-    },
-    createdAt: new Date(),
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.",
-    images: [],
-    comments: [
-      {
-        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        author: {
-          name: "Jane Doe",
-          avatar: "https://i.pravatar.cc/300?img=2",
-        },
-      },
-    ],
+interface PostCardProps {
+  postId: string | null;
+  author: {
+    name: string;
+    avatar?: string;
   };
+  createdAt: Date;
+  content: string;
+  images: string[];
+  comments: {
+    message: string;
+    author: {
+      name: string;
+      avatar?: string;
+    };
+  }[];
+}
 
-  const { author, createdAt, content, images, comments } = post;
+export const PostCard = (props: PostCardProps) => {
+  const { postId, author, createdAt, content, images, comments } = props;
 
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const { status } = useSession();
   const form = useForm({
     defaultValues: {
       message: "",
@@ -42,7 +43,17 @@ export const PostCard = () => {
 
   function onSubmit() {
     console.log("commenting");
+    form.reset();
   }
+
+  const handleKeyDown = async (
+    event: KeyboardEvent<HTMLTextAreaElement>
+  ): Promise<void> => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      await form.handleSubmit(onSubmit)();
+    }
+  };
 
   return (
     <Card>
@@ -97,9 +108,19 @@ export const PostCard = () => {
                         <FormItem>
                           <FormControl>
                             <Textarea
+                              ref={textareaRef}
                               placeholder="Ecrivez votre commentaire"
-                              className="mt-1 w-full resize-none"
-                              {...field}
+                              rows={1}
+                              className="mt-1 min-h-0 w-full resize-none"
+                              value={field.value}
+                              onKeyDown={handleKeyDown}
+                              onChange={(e) => {
+                                if (!textareaRef.current) return;
+                                field.onChange(e.target.value);
+                                textareaRef.current.style.height = "auto";
+                                textareaRef.current.style.height =
+                                  textareaRef.current.scrollHeight + 2 + "px";
+                              }}
                             />
                           </FormControl>
                         </FormItem>

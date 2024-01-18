@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus as PlusIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Loader2 as SpinnerIcon, Plus as AddIcon } from "lucide-react";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,6 +18,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
+import { api } from "@/trpc/react";
+
+const createPostSchema = z.object({
+  content: z.string().min(1),
+  images: z.array(z.string().url()),
+});
+
+type CreatePostSchemaType = z.infer<typeof createPostSchema>;
 
 interface CreatePostModalProps {
   children: React.ReactNode;
@@ -23,17 +34,44 @@ interface CreatePostModalProps {
 export const CreatePostModal = (props: CreatePostModalProps) => {
   const { children } = props;
 
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const { data } = useSession();
   const [open, setOpen] = React.useState<boolean>(false);
-  const form = useForm({
+  const form = useForm<CreatePostSchemaType>({
     defaultValues: {
       content: "",
       images: [],
     },
+    resolver: zodResolver(createPostSchema),
+  });
+  const utils = api.useUtils();
+  const createPost = api.post.create.useMutation({
+    onError: (error) => {
+      console.log(error)
+    },
+    onSuccess: async (addedPost) => {
+      form.reset();
+      setOpen(false);
+      utils.post.getLatest.setData(undefined, (oldPosts) => [
+        {
+          ...addedPost,
+          comments: [],
+          createdAt: new Date(),
+          author: {
+            name: data?.user.name ?? "",
+            image: data?.user.image ?? null,
+          },
+        },
+        ...(oldPosts ?? []),
+      ]);
+    },
   });
 
-  const onSubmit = () => {
-    console.log("submit");
+  const onSubmit: SubmitHandler<CreatePostSchemaType> = (values) => {
+    createPost.mutate({
+      content: values.content,
+      images: values.images,
+    });
   };
 
   return (
@@ -61,9 +99,18 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                       <FormItem>
                         <FormControl>
                           <Textarea
+                            ref={textareaRef}
                             placeholder="Ecrivez ici"
-                            className="resize-none"
-                            {...field}
+                            rows={1}
+                            className="max-h-[95px] resize-none"
+                            value={field.value}
+                            onChange={(e) => {
+                              if (!textareaRef.current) return;
+                              field.onChange(e.target.value);
+                              textareaRef.current.style.height = "auto";
+                              textareaRef.current.style.height =
+                                textareaRef.current.scrollHeight + 2 + "px";
+                            }}
                           />
                         </FormControl>
                       </FormItem>
@@ -76,10 +123,21 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                     <p className="text-xs">Ajouter une image</p>
                   </div>
                 </div>
+                <div className="mt-4">
+                  <div className="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-muted-foreground bg-transparent text-muted-foreground duration-150 hover:bg-slate-200">
+                    <PlusIcon size={15} />
+                    <p className="text-xs">Ajouter une image</p>
+                  </div>
+                </div>
               </div>
             </ScrollArea>
-            <div className="mt-4 px-6">
-              <Button type="submit" variant="default">
+            <div className="mt-4 flex justify-end px-6">
+              <Button type="submit" disabled={createPost.isLoading || !open} variant="default">
+                {createPost.isLoading ? (
+                  <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <AddIcon className="mr-2 h-4 w-4" />
+                )}
                 Publier
               </Button>
             </div>
