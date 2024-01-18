@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useDebounce } from "use-debounce";
 import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
@@ -8,8 +9,12 @@ import { PostCardSkeleton } from "./post-card-skeleton";
 import { SearchInput } from "./search-input";
 
 export const Feed = () => {
+  // TODO : use useDebounce
   const [search, setSearch] = React.useState("");
-  const { data: posts, isLoading } = api.post.getLatest.useQuery({ search });
+  const [debouncedSearch] = useDebounce(search, 500);
+  const { data: posts, isLoading } = api.post.getLatest.useQuery({
+    search: search === "" ? search : debouncedSearch,
+  });
 
   return (
     <div className="mx-auto w-full max-w-3xl space-y-4 px-4 sm:px-8">
@@ -21,7 +26,7 @@ export const Feed = () => {
       />
       <CreatePostCard />
       {isLoading &&
-        Array.from({ length: 10 }).map((_, index) => <PostCardSkeleton key={index} />)}
+        Array.from({ length: 3 }).map((_, index) => <PostCardSkeleton key={index} />)}
       {posts?.map((post, index) => {
         return (
           <PostCard
