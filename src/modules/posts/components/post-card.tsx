@@ -60,7 +60,7 @@ export const PostCard = (props: PostCardProps) => {
         .getData()
         ?.find((post) => post.id === postId)?.comments;
       // @ts-expect-error no id in newComment because it's an optimistic update
-      utils.post.getLatest.setData(undefined, (oldPosts) => {
+      utils.post.getLatest.setData({}, (oldPosts) => {
         if (!oldPosts) return oldPosts;
         return oldPosts.map((post) => {
           if (post.id === postId) {
@@ -85,7 +85,7 @@ export const PostCard = (props: PostCardProps) => {
       return { previousComents };
     },
     onError: () => {
-      utils.post.getLatest.setData(undefined, (oldPosts) => {
+      utils.post.getLatest.setData({}, (oldPosts) => {
         if (!oldPosts) return oldPosts;
         return oldPosts.map((post) => {
           if (post.id === postId) {

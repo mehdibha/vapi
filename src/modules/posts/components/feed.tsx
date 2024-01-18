@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
