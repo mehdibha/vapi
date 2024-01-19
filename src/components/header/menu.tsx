@@ -20,7 +20,7 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex flex-col w-[300px]">
+      <SheetContent className="flex w-[300px] flex-col">
         <div className="flex-1"></div>
         <SheetFooter>
           <SheetClose asChild>

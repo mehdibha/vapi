@@ -11,7 +11,7 @@ export const postRouter = createTRPCRouter({
         search: z.string().optional(),
       })
     )
-    .query(async({ ctx, input }) => {
+    .query(async ({ ctx, input }) => {
       // const { limit = 10, cursor, search } = input;
       const limit = input.limit ?? 10;
       const cursor = input.cursor;

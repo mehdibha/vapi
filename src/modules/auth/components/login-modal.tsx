@@ -32,7 +32,7 @@ export const LoginModal = (props: LoginModalProps) => {
           </DialogDescription>
         </DialogHeader>
         <div className="mt-6 space-y-2">
-          <GoogleLoginButton className="block mx-auto" />
+          <GoogleLoginButton className="mx-auto block" />
         </div>
       </DialogContent>
     </Dialog>
