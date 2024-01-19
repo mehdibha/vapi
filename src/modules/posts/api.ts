@@ -4,9 +4,18 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/
 
 export const postRouter = createTRPCRouter({
   getLatest: publicProcedure
-    .input(z.object({ search: z.string().optional() }))
-    .query(({ ctx, input }) => {
-      return ctx.db.post.findMany({
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).nullish(),
+        cursor: z.string().nullish(),
+        search: z.string().optional(),
+      })
+    )
+    .query(async({ ctx, input }) => {
+      // const { limit = 10, cursor, search } = input;
+      const limit = input.limit ?? 10;
+      const cursor = input.cursor;
+      const posts = await ctx.db.post.findMany({
         ...(input.search && {
           where: {
             content: {
@@ -15,8 +24,9 @@ export const postRouter = createTRPCRouter({
             },
           },
         }),
-        orderBy: { createdAt: "desc" },
-        take: 10,
+        take: limit + 1,
+        cursor: cursor ? { id: cursor } : undefined,
+        orderBy: { id: "desc" },
         select: {
           id: true,
           content: true,
@@ -42,6 +52,15 @@ export const postRouter = createTRPCRouter({
           },
         },
       });
+      let nextCursor: typeof cursor | undefined = undefined;
+      if (posts.length > limit) {
+        const nextItem = posts.pop();
+        nextCursor = nextItem!.id;
+      }
+      return {
+        posts,
+        nextCursor,
+      };
     }),
   create: protectedProcedure
     .input(z.object({ content: z.string().min(1), images: z.array(z.string().url()) }))

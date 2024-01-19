@@ -1,6 +1,6 @@
 "use client";
 
-import React, { type KeyboardEvent } from "react";
+import React, { type ForwardedRef, type KeyboardEvent } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -39,7 +39,7 @@ const addCommentSchema = z.object({
 
 type AddCommentSchemaType = z.infer<typeof addCommentSchema>;
 
-export const PostCard = (props: PostCardProps) => {
+export const PostCard = React.forwardRef((props: PostCardProps, ref: ForwardedRef<HTMLDivElement>) => {
   const { postId, author, createdAt, content, images, comments } = props;
 
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
@@ -53,63 +53,63 @@ export const PostCard = (props: PostCardProps) => {
   });
 
   const utils = api.useUtils();
-  const addComment = api.comments.add.useMutation({
-    onMutate: async (newComment) => {
-      await utils.post.getLatest.cancel();
-      const previousComents = utils.post.getLatest
-        .getData()
-        ?.find((post) => post.id === postId)?.comments;
-      // @ts-expect-error no id in newComment because it's an optimistic update
-      utils.post.getLatest.setData({}, (oldPosts) => {
-        if (!oldPosts) return oldPosts;
-        return oldPosts.map((post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              comments: [
-                ...post.comments,
-                {
-                  message: newComment.message,
-                  author: {
-                    name: data?.user.name,
-                    image: data?.user.image,
-                  },
-                },
-              ],
-            };
-          }
-          return post;
-        });
-      });
-      form.reset();
-      return { previousComents };
-    },
-    onError: () => {
-      utils.post.getLatest.setData({}, (oldPosts) => {
-        if (!oldPosts) return oldPosts;
-        return oldPosts.map((post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              comments: post.comments.filter((comment) => !!comment.id),
-            };
-          }
-          return post;
-        });
-      });
-    },
-    onSettled: async () => {
-      // TODO: optimize later
-      await utils.post.getLatest.invalidate();
-    },
-  });
+  // const addComment = api.comments.add.useMutation({
+  //   onMutate: async (newComment) => {
+  //     await utils.post.getLatest.cancel();
+  //     const previousComents = utils.post.getLatest
+  //       .getData()
+  //       ?.find((post) => post.id === postId)?.comments;
+  //     // @ts-expect-error no id in newComment because it's an optimistic update
+  //     utils.post.getLatest.setData({}, (oldPosts) => {
+  //       if (!oldPosts) return oldPosts;
+  //       return oldPosts.map((post) => {
+  //         if (post.id === postId) {
+  //           return {
+  //             ...post,
+  //             comments: [
+  //               ...post.comments,
+  //               {
+  //                 message: newComment.message,
+  //                 author: {
+  //                   name: data?.user.name,
+  //                   image: data?.user.image,
+  //                 },
+  //               },
+  //             ],
+  //           };
+  //         }
+  //         return post;
+  //       });
+  //     });
+  //     form.reset();
+  //     return { previousComents };
+  //   },
+  //   onError: () => {
+  //     utils.post.getLatest.setData({}, (oldPosts) => {
+  //       if (!oldPosts) return oldPosts;
+  //       return oldPosts.map((post) => {
+  //         if (post.id === postId) {
+  //           return {
+  //             ...post,
+  //             comments: post.comments.filter((comment) => !!comment.id),
+  //           };
+  //         }
+  //         return post;
+  //       });
+  //     });
+  //   },
+  //   onSettled: async () => {
+  //     // TODO: optimize later
+  //     await utils.post.getLatest.invalidate();
+  //   },
+  // });
 
   const onSubmit: SubmitHandler<AddCommentSchemaType> = (values) => {
     if (!postId) return;
-    addComment.mutate({
-      message: values.message,
-      postId: postId,
-    });
+    // addComment.mutate({
+    //   message: values.message,
+    //   postId: postId,
+    // });
   };
 
   const handleKeyDown = async (
@@ -122,7 +122,7 @@ export const PostCard = (props: PostCardProps) => {
   };
 
   return (
-    <Card>
+    <Card ref={ref}>
       <CardHeader>
         <div className="flex items-center space-x-4">
           <Avatar>
@@ -212,4 +212,6 @@ export const PostCard = (props: PostCardProps) => {
       </div>
     </Card>
   );
-};
+});
+
+PostCard.displayName = "PostCard";
