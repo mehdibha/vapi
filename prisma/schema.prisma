@@ -67,7 +67,7 @@ model Post {
     content   String
     images    String[]
     published Boolean   @default(false)
-    author    User     @relation(fields: [authorId], references: [id])
+    author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     authorId  String
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
@@ -77,10 +77,10 @@ model Post {
 model Comment {
     id        String   @id @default(cuid())
     message   String
-    author    User     @relation(fields: [authorId], references: [id])
+    author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     authorId  String
     postId    String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    post      Post    @relation(fields: [postId], references: [id])
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

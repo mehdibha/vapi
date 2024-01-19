@@ -10,14 +10,14 @@ import { PostCardSkeleton } from "./post-card-skeleton";
 import { SearchInput } from "./search-input";
 
 export const Feed = () => {
-  const limit = 5;
+  const limit = 10;
   const [search, setSearch] = React.useState("");
   const [debouncedSearch] = useDebounce(search, 500);
   const { ref, entry } = useInView({
     threshold: 0,
   });
   const { data, isLoading, fetchNextPage, isFetchingNextPage } =
-    api.post.getLatest.useInfiniteQuery(
+    api.post.infinitePosts.useInfiniteQuery(
       {
         limit,
         search: search === "" ? search : debouncedSearch,
@@ -52,7 +52,7 @@ export const Feed = () => {
       <CreatePostCard />
       {posts.map((post, index) => (
         <PostCard
-          key={post.id}
+          key={index}
           ref={posts.length - 2 === index ? ref : undefined}
           postId={post.id}
           author={{

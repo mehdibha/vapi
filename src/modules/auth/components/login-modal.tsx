@@ -26,13 +26,13 @@ export const LoginModal = (props: LoginModalProps) => {
       </DialogTrigger>
       <DialogContent className="max-w-sm pt-10">
         <DialogHeader>
-          <DialogTitle className="text-center">Se connecter</DialogTitle>
+          <DialogTitle className="text-center text-2xl">Se connecter</DialogTitle>
           <DialogDescription className="text-center">
             Vous devez vous connecter pour pouvoir publier.
           </DialogDescription>
         </DialogHeader>
-        <div className="mt-4 space-y-2">
-          <GoogleLoginButton className="w-full" />
+        <div className="mt-6 space-y-2">
+          <GoogleLoginButton className="block mx-auto" />
         </div>
       </DialogContent>
     </Dialog>

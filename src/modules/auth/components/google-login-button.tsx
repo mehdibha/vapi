@@ -9,7 +9,7 @@ type GoogleLoginButtonProps = React.HTMLAttributes<HTMLElement>;
 export const GoogleLoginButton = (props: GoogleLoginButtonProps) => {
   return (
     <Button
-      variant="secondary"
+      variant="default"
       onClick={async () => {
         await signIn("google");
       }}

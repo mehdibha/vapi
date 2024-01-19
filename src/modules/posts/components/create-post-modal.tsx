@@ -35,7 +35,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
   const { children } = props;
 
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-  const { data } = useSession();
+  const { data: userData } = useSession();
   const [open, setOpen] = React.useState<boolean>(false);
   const form = useForm<CreatePostSchemaType>({
     defaultValues: {
@@ -47,23 +47,36 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
   const utils = api.useUtils();
   const createPost = api.post.create.useMutation({
     onError: (error) => {
-      console.log(error)
+      console.log(error);
     },
     onSuccess: async (addedPost) => {
       form.reset();
       setOpen(false);
-      utils.post.getLatest.setData(undefined, (oldPosts) => [
-        {
-          ...addedPost,
-          comments: [],
-          createdAt: new Date(),
-          author: {
-            name: data?.user.name ?? "",
-            image: data?.user.image ?? null,
-          },
-        },
-        ...(oldPosts ?? []),
-      ]);
+      await utils.post.infinitePosts.cancel();
+      utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
+        if (!data) {
+          console.log("no data");
+          return data;
+        }
+        return {
+          ...data,
+          pages: data.pages.map((page) => ({
+            ...page,
+            posts: [
+              {
+                ...addedPost,
+                comments: [],
+                createdAt: new Date(),
+                author: {
+                  name: userData?.user.name ?? "",
+                  image: userData?.user.image ?? null,
+                },
+              },
+              ...page.posts,
+            ],
+          })),
+        };
+      });
     },
   });
 
@@ -86,7 +99,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
             <div className="mb-3 flex items-center space-x-4 px-6">
               <UserAvatar />
               <div>
-                <p className="text-sm font-medium leading-none">{data?.user.name}</p>
+                <p className="text-sm font-medium leading-none">{userData?.user.name}</p>
               </div>
             </div>
             <ScrollArea className="max-h-[200px] px-0">
@@ -132,7 +145,11 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
               </div>
             </ScrollArea>
             <div className="mt-4 flex justify-end px-6">
-              <Button type="submit" disabled={createPost.isLoading || !open} variant="default">
+              <Button
+                type="submit"
+                disabled={createPost.isLoading || !open}
+                variant="default"
+              >
                 {createPost.isLoading ? (
                   <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
                 ) : (

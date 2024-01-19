@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
-  getLatest: publicProcedure
+  infinitePosts: publicProcedure
     .input(
       z.object({
         limit: z.number().min(1).max(100).nullish(),
@@ -26,7 +26,7 @@ export const postRouter = createTRPCRouter({
         }),
         take: limit + 1,
         cursor: cursor ? { id: cursor } : undefined,
-        orderBy: { id: "desc" },
+        orderBy: { createdAt: "desc" },
         select: {
           id: true,
           content: true,
