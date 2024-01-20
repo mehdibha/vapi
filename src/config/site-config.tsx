@@ -1,3 +1,5 @@
+import { FacebookIcon, GithubIcon, MailIcon } from "lucide-react";
+
 export const siteConfig = {
   global: {
     url: "https://vapi.tn",
@@ -17,6 +19,11 @@ export const siteConfig = {
     twitter: {
       creator: "@mehdibha_",
     },
+    externalLinks :  [
+      { icon: FacebookIcon, url: "https://www.facebook.com/groups/160143328137207" },
+      { icon: MailIcon, url: "mailto:hello@mehdibha.com" },
+      { icon: GithubIcon, url: "https://github.com/mehdibha/vapi" },
+    ]
   },
   header: {
     nav: {
@@ -31,16 +38,6 @@ export const siteConfig = {
         label: "Sign in",
         href: "/login",
       },
-    },
-  },
-  footer: {
-    socialLinks: {
-      twitter: "https://twitter.com/mehdibha_",
-      instagram: "https://instagram.com/mehdibha",
-      github: "https://github.com/mehdibha",
-      linkedin: "https://www.linkedin.com/mehdibha",
-      mail: "mailto:hello@mehdibha.com",
-      codepen: null,
     },
   },
   homePage: {

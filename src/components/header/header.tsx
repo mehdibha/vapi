@@ -3,13 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/utils/classes";
 import { siteConfig } from "@/config";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
 import { HeaderMenu } from "./menu";
+import { Nav } from "./nav";
 
 export const Header = () => {
   const { status } = useSession();
@@ -26,9 +26,8 @@ export const Header = () => {
             alt={siteConfig.global.name}
             width={200}
             height={200}
-            className="object-contain h-6"
+            className="h-7 object-contain"
           />
-          {/* <span className="inline-block font-bold">{siteConfig.global.name}</span> */}
         </Link>
         <Nav items={siteConfig.header.nav.links} />
         <div className="flex w-[200px] justify-end">
@@ -37,61 +36,17 @@ export const Header = () => {
               <Link href="/login">Se connecter</Link>
             </Button>
           )}
-          {status === "authenticated" && (
-            <HeaderMenu>
-              <Button variant="ghost" size="icon">
+          <HeaderMenu>
+            <Button variant="ghost" size="icon">
+              {status === "authenticated" ? (
                 <UserAvatar />
-              </Button>
-            </HeaderMenu>
-          )}
+              ) : status === "unauthenticated" ? (
+                <MenuIcon />
+              ) : null}
+            </Button>
+          </HeaderMenu>
         </div>
       </div>
     </header>
-  );
-};
-
-interface NavItem {
-  label: string;
-  href?: string;
-  disabled?: boolean;
-  external?: boolean;
-}
-
-interface NavProps {
-  items: NavItem[];
-  direction?: "column" | "row";
-  onNavItemClick?: () => void;
-}
-
-const Nav = (props: NavProps) => {
-  const { items, direction = "row", onNavItemClick } = props;
-  const pathname = usePathname();
-
-  return (
-    <nav
-      className={cn("flex items-center gap-0 sm:gap-2", {
-        "flex-col gap-2": direction === "column",
-      })}
-    >
-      {items?.map(
-        (item, index) =>
-          item.href && (
-            <Link
-              key={index}
-              href={item.href}
-              className={cn(
-                "w-full rounded-full px-4 py-1 text-center text-sm font-medium transition-all hover:text-foreground",
-                item.disabled && "cursor-not-allowed opacity-80",
-                item.href === pathname
-                  ? "bg-foreground/10 text-foreground"
-                  : "text-foreground/60"
-              )}
-              onClick={onNavItemClick}
-            >
-              {item.label}
-            </Link>
-          )
-      )}
-    </nav>
   );
 };

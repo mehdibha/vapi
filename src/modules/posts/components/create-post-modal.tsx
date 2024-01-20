@@ -112,7 +112,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                 <p className="text-sm font-medium leading-none">{userData?.user.name}</p>
               </div>
             </div>
-            <div className="h-[200px] overflow-y-scroll px-0 pb-6">
+            <div className="h-[250px] overflow-y-scroll px-0 pb-6">
               <div className="px-6 pt-1">
                 <FormField
                   control={form.control}
