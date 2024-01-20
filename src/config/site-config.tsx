@@ -1,9 +1,9 @@
 export const siteConfig = {
   global: {
     url: "https://vapi.tn",
-    name: "vapi.tn",
+    name: "VAPI",
     logo: "/images/logo.png",
-    title: "vapi.tn",
+    title: "Vapi",
     description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",
     keywords: [],
     authors: [

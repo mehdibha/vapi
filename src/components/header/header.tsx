@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,14 @@ export const Header = () => {
           href="/"
           className="flex w-[200px] items-center space-x-2 duration-150 hover:opacity-80"
         >
-          <span className="inline-block font-bold">{siteConfig.global.name}</span>
+          <Image
+            src={siteConfig.global.logo}
+            alt={siteConfig.global.name}
+            width={200}
+            height={200}
+            className="object-contain h-6"
+          />
+          {/* <span className="inline-block font-bold">{siteConfig.global.name}</span> */}
         </Link>
         <Nav items={siteConfig.header.nav.links} />
         <div className="flex w-[200px] justify-end">
