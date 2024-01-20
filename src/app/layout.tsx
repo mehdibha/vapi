@@ -6,6 +6,7 @@ import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config";
 import { Providers } from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const config = siteConfig.global;
 
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={cn(inter.variable)} suppressHydrationWarning>
         <Providers>
           <Analytics />
+          <Toaster />
           {children}
         </Providers>
       </body>

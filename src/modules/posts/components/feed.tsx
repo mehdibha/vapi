@@ -72,7 +72,7 @@ export const Feed = () => {
         />
       ))}
       {(isLoading || isFetchingNextPage) &&
-        Array.from({ length: 3 }).map((_, index) => <PostCardSkeleton key={index} />)}
+        Array.from({ length: 2 }).map((_, index) => <PostCardSkeleton key={index} />)}
     </div>
   );
 };

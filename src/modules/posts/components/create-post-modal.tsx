@@ -2,9 +2,9 @@
 
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus as PlusIcon } from "lucide-react";
 import { Loader2 as SpinnerIcon, Plus as AddIcon } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,15 +14,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { InputImages } from "@/components/ui/input-images";
 import { Textarea } from "@/components/ui/textarea";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
+import { uploadFiles } from "@/modules/upload/services";
 import { api } from "@/trpc/react";
 
 const createPostSchema = z.object({
-  content: z.string().min(1),
-  images: z.array(z.string().url()),
+  content: z.string(),
 });
 
 type CreatePostSchemaType = z.infer<typeof createPostSchema>;
@@ -37,21 +37,24 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const { data: userData } = useSession();
   const [open, setOpen] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [images, setImages] = React.useState<{ preview: string; file: File }[]>([]);
   const form = useForm<CreatePostSchemaType>({
     defaultValues: {
       content: "",
-      images: [],
     },
     resolver: zodResolver(createPostSchema),
   });
   const utils = api.useUtils();
   const createPost = api.post.create.useMutation({
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
+      toast("Une erreur est survenue lors de la publication");
     },
     onSuccess: async (addedPost) => {
       form.reset();
       setOpen(false);
+      setIsLoading(false);
+      setImages([]);
       await utils.post.infinitePosts.cancel();
       utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
         if (!data) {
@@ -80,17 +83,24 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
     },
   });
 
-  const onSubmit: SubmitHandler<CreatePostSchemaType> = (values) => {
-    createPost.mutate({
-      content: values.content,
-      images: values.images,
-    });
+  const onSubmit: SubmitHandler<CreatePostSchemaType> = async (values) => {
+    try {
+      setIsLoading(true);
+      const uploadedImages = await uploadFiles(images.map((image) => image.file));
+      createPost.mutate({
+        content: values.content,
+        images: uploadedImages.filter(Boolean) as string[],
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast("Une erreur est survenue lors de l'upload des images");
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="p-0">
+      <DialogContent className="max-h-screen p-0">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="py-6">
             <div className="mb-6 flex flex-col space-y-1.5 px-6">
@@ -102,7 +112,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                 <p className="text-sm font-medium leading-none">{userData?.user.name}</p>
               </div>
             </div>
-            <ScrollArea className="max-h-[200px] px-0">
+            <div className="h-[200px] overflow-y-scroll px-0 pb-6">
               <div className="px-6 pt-1">
                 <FormField
                   control={form.control}
@@ -115,7 +125,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                             ref={textareaRef}
                             placeholder="Ecrivez ici"
                             rows={1}
-                            className="max-h-[95px] resize-none"
+                            className="text-md mb-4 max-h-none resize-none border-none p-0 shadow-none focus-visible:ring-0"
                             value={field.value}
                             onChange={(e) => {
                               if (!textareaRef.current) return;
@@ -130,27 +140,12 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                     );
                   }}
                 />
-                <div className="mt-4">
-                  <div className="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-muted-foreground bg-transparent text-muted-foreground duration-150 hover:bg-slate-200">
-                    <PlusIcon size={15} />
-                    <p className="text-xs">Ajouter une image</p>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-muted-foreground bg-transparent text-muted-foreground duration-150 hover:bg-slate-200">
-                    <PlusIcon size={15} />
-                    <p className="text-xs">Ajouter une image</p>
-                  </div>
-                </div>
+                <InputImages value={images} onImagesChange={setImages} />
               </div>
-            </ScrollArea>
+            </div>
             <div className="mt-4 flex justify-end px-6">
-              <Button
-                type="submit"
-                disabled={createPost.isLoading || !open}
-                variant="default"
-              >
-                {createPost.isLoading ? (
+              <Button type="submit" disabled={isLoading || !open} variant="default">
+                {isLoading ? (
                   <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
                   <AddIcon className="mr-2 h-4 w-4" />

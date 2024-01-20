@@ -3,6 +3,13 @@
 import React, { type ForwardedRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
 import { formatRelativeTime } from "@/utils/date";
 import { CreateComment } from "@/modules/comments/components/create-comment";
@@ -48,12 +55,28 @@ export const PostCard = React.forwardRef(
         <div>
           <p className="p-6 pt-0">{content}</p>
           {images.length > 0 && (
-            <div className="flex justify-center border-y">images here</div>
+            <Carousel className="h-[300px] w-full">
+              <CarouselContent>
+                {images.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <img
+                      src={image}
+                      alt="vape"
+                      className="h-[300px] w-full object-cover"
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              {images.length > 1 && (
+                <>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </>
+              )}
+            </Carousel>
           )}
         </div>
-        <div className="px-6">
-          <Separator />
-        </div>
+        <Separator />
         <div className="space-y-4 p-6">
           {comments.map((comment, index) => {
             return (
