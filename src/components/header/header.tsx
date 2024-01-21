@@ -15,13 +15,10 @@ export const Header = () => {
   const { status } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-card shadow-sm dark:bg-background dark:text-foreground">
+    <header className="sticky top-0 z-50 border-b bg-card text-card-foreground shadow-sm">
       <div className="container mx-auto flex h-12 w-full max-w-[1400px] items-center justify-between py-2">
-        <div className="md:w-[200px] flex justify-start">
-          <Link
-            href="/"
-            className="duration-150 hover:opacity-80"
-          >
+        <div className="flex justify-start md:w-[200px]">
+          <Link href="/" className="duration-150 hover:opacity-80">
             <Image
               src={siteConfig.global.logo}
               alt={siteConfig.global.name}
