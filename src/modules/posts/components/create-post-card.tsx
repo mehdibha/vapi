@@ -11,7 +11,7 @@ export const CreatePostCard = () => {
   const { status } = useSession();
 
   return (
-    <Card className="xs:px-6 px-4 py-6">
+    <Card className="px-4 py-6 xs:px-6">
       <div className="flex items-center space-x-2 md:space-x-4">
         <UserAvatar />
         {status === "authenticated" ? (

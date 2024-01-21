@@ -19,11 +19,11 @@ export const siteConfig = {
     twitter: {
       creator: "@mehdibha_",
     },
-    externalLinks :  [
+    externalLinks: [
       { icon: FacebookIcon, url: "https://www.facebook.com/groups/160143328137207" },
       { icon: MailIcon, url: "mailto:hello@mehdibha.com" },
       { icon: GithubIcon, url: "https://github.com/mehdibha/vapi" },
-    ]
+    ],
   },
   header: {
     nav: {

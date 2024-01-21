@@ -11,7 +11,7 @@ export const LogoutButton = ({ className }: { className: string }) => {
       onClick={async () => {
         await signOut({ callbackUrl: window.location.origin });
       }}
-      className={cn("h-8 w-8 ",className)}
+      className={cn("h-8 w-8 ", className)}
     >
       <LogOutIcon size={18} />
     </Button>

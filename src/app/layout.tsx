@@ -1,12 +1,12 @@
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/utils/classes";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config";
 import { Providers } from "./providers";
-import { Toaster } from "@/components/ui/sonner";
 
 const config = siteConfig.global;
 

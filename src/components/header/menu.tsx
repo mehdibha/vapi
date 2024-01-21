@@ -29,7 +29,7 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
       <SheetContent className="flex w-[270px] flex-col">
         <div className="flex-1">
           {status === "unauthenticated" && (
-            <div className="flex justify-center mt-8">
+            <div className="mt-8 flex justify-center">
               <Button asChild size="sm" className="w-[80%]">
                 <Link href="/login">Se connecter</Link>
               </Button>

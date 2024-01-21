@@ -14,7 +14,7 @@ export const GoogleLoginButton = (props: GoogleLoginButtonProps) => {
       onClick={async () => {
         await signIn("google");
       }}
-      className={cn("space-x-2",props.className)}
+      className={cn("space-x-2", props.className)}
     >
       <svg
         stroke="currentColor"
