@@ -16,15 +16,16 @@ interface NavProps {
   items: NavItem[];
   direction?: "column" | "row";
   onNavItemClick?: () => void;
+  className?: string;
 }
 
 export const Nav = (props: NavProps) => {
-  const { items, direction = "row", onNavItemClick } = props;
+  const { items, direction = "row", onNavItemClick, className } = props;
   const pathname = usePathname();
 
   return (
     <nav
-      className={cn("flex items-center gap-0 sm:gap-2", {
+      className={cn("flex items-center gap-0 sm:gap-2", className, {
         "flex-col gap-2": direction === "column",
       })}
     >

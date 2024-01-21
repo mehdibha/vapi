@@ -16,23 +16,25 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card shadow-sm dark:bg-background dark:text-foreground">
-      <div className="container flex h-12 items-center justify-between py-2">
-        <Link
-          href="/"
-          className="flex w-[200px] items-center space-x-2 duration-150 hover:opacity-80"
-        >
-          <Image
-            src={siteConfig.global.logo}
-            alt={siteConfig.global.name}
-            width={200}
-            height={200}
-            className="h-7 object-contain"
-          />
-        </Link>
-        <Nav items={siteConfig.header.nav.links} />
-        <div className="flex w-[200px] justify-end">
+      <div className="container mx-auto flex h-12 w-full max-w-[1400px] items-center justify-between py-2">
+        <div className="md:w-[200px] flex justify-start">
+          <Link
+            href="/"
+            className="duration-150 hover:opacity-80"
+          >
+            <Image
+              src={siteConfig.global.logo}
+              alt={siteConfig.global.name}
+              width={112}
+              height={56}
+              className="h-[28px] w-[56px] object-contain"
+            />
+          </Link>
+        </div>
+        <Nav items={siteConfig.header.nav.links} className="hidden md:block" />
+        <div className="flex items-center justify-end space-x-4 md:w-[200px]">
           {status === "unauthenticated" && (
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="hidden md:inline-flex">
               <Link href="/login">Se connecter</Link>
             </Button>
           )}

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import React from "react";
+import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -27,6 +28,13 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="flex w-[270px] flex-col">
         <div className="flex-1">
+          {status === "unauthenticated" && (
+            <div className="flex justify-center mt-8">
+              <Button asChild size="sm" className="w-[80%]">
+                <Link href="/login">Se connecter</Link>
+              </Button>
+            </div>
+          )}
           {status === "authenticated" && (
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -42,7 +50,7 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
               </SheetClose>
             </div>
           )}
-          <div className="mt-8  mx-auto">
+          <div className="mx-auto mt-6">
             <Nav direction="column" items={siteConfig.header.nav.links} />
           </div>
         </div>

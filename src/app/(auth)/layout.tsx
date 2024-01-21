@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       >
         <>
           <ChevronLeft className="mr-2 h-4 w-4" />
-          Back
+          Retour
         </>
       </Link>
       <div className="w-full max-w-md rounded-xl border bg-card px-4 py-12 shadow-sm sm:px-12">
