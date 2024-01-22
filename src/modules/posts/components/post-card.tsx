@@ -62,7 +62,7 @@ export const PostCard = React.forwardRef(
                     <img
                       src={image}
                       alt="vape"
-                      className="h-[300px] w-full object-cover"
+                      className="h-[300px] w-full object-contain"
                     />
                   </CarouselItem>
                 ))}
