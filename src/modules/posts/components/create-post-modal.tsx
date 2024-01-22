@@ -47,8 +47,9 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
   });
   const utils = api.useUtils();
   const createPost = api.post.create.useMutation({
-    onError: () => {
-      toast("Une erreur est survenue lors de la publication");
+    onError: (error) => {
+      setIsLoading(false);
+      toast(`Une erreur est survenue lors de la publication (${error.message})`);
     },
     onSuccess: async (addedPost) => {
       form.reset();
@@ -97,6 +98,14 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
     }
   };
 
+  const handleLimitImages = (length: number) => {
+    if (length + images.length > 5) {
+      toast("Vous ne pouvez pas ajouter plus de 5 images");
+      return false;
+    }
+    return true;
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -140,7 +149,11 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                     );
                   }}
                 />
-                <InputImages value={images} onImagesChange={setImages} />
+                <InputImages
+                  value={images}
+                  onImagesChange={setImages}
+                  onChangeFilesLength={handleLimitImages}
+                />
               </div>
             </div>
             <div className="mt-4 flex justify-end px-6">

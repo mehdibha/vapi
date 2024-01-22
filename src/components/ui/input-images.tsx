@@ -21,14 +21,17 @@ interface InputImagesProps {
       }[]
     >
   >;
+  onChangeFilesLength: (length: number) => boolean;
 }
 
 export const InputImages = (props: InputImagesProps) => {
-  const { value: images, onImagesChange } = props;
+  const { value: images, onImagesChange, onChangeFilesLength } = props;
 
   const onChangePicture = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       if (event.target.files) {
+        const res = onChangeFilesLength(event.target.files.length);
+        if (!res) return;
         for (const file of event.target.files) {
           if (file) {
             if (file.size / 1024 / 1024 > 5) {
@@ -45,7 +48,7 @@ export const InputImages = (props: InputImagesProps) => {
         event.currentTarget.value = "";
       }
     },
-    [onImagesChange]
+    [onChangeFilesLength, onImagesChange]
   );
 
   const handleRemove = (index: number) => {

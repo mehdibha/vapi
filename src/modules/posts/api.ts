@@ -63,8 +63,17 @@ export const postRouter = createTRPCRouter({
       };
     }),
   create: protectedProcedure
-    .input(z.object({ content: z.string().min(1), images: z.array(z.string().url()) }))
+    .input(z.object({ content: z.string(), images: z.array(z.string().url()) }))
     .mutation(async ({ ctx, input }) => {
+      if (input.images.length === 0 && input.content === "") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Post cannot be empty" });
+      }
+      if (input.images.length > 5) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Post cannot have more than 5 images",
+        });
+      }
       return ctx.db.post.create({
         data: {
           content: input.content,

@@ -52,7 +52,7 @@ export const Feed = () => {
       <CreatePostCard />
       {posts.map((post, index) => (
         <PostCard
-          key={index}
+          key={post.id}
           ref={posts.length - 2 === index ? ref : undefined}
           postId={post.id}
           author={{

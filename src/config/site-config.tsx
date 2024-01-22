@@ -22,7 +22,7 @@ export const siteConfig = {
     externalLinks: [
       { icon: FacebookIcon, url: "https://www.facebook.com/groups/160143328137207" },
       { icon: MailIcon, url: "mailto:hello@mehdibha.com" },
-      { icon: GithubIcon, url: "https://github.com/mehdibha/vapi" },
+      { icon: GithubIcon, url: "https://github.com/mehdibha/vapi.tn" },
     ],
   },
   header: {
