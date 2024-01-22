@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <div className="container mt-36 pb-8">
       <Separator className="mb-4" />
-      <div className="flex xs:items-center xs:justify-between flex-col xs:flex-row gap-6">
+      <div className="flex flex-col gap-6 xs:flex-row xs:items-center xs:justify-between">
         <p className="text-sm">Copyright © 2023 vapi.tn</p>
         <div className="flex h-5 items-center space-x-4">
           <div className="flex h-5 items-center space-x-1">
