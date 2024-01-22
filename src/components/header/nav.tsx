@@ -16,11 +16,12 @@ interface NavProps {
   items: NavItem[];
   direction?: "column" | "row";
   onNavItemClick?: () => void;
+  itemWrapper?: React.ComponentType<{ children: React.ReactNode }>;
   className?: string;
 }
 
 export const Nav = (props: NavProps) => {
-  const { items, direction = "row", onNavItemClick, className } = props;
+  const { items, direction = "row", onNavItemClick, itemWrapper, className } = props;
   const pathname = usePathname();
 
   return (
@@ -29,11 +30,13 @@ export const Nav = (props: NavProps) => {
         "flex-col gap-2": direction === "column",
       })}
     >
-      {items?.map(
-        (item, index) =>
-          item.href && (
+      {items?.map((item, index) => {
+        if (!item.href) return null;
+        const WrappedLink = itemWrapper ?? React.Fragment;
+
+        return (
+          <WrappedLink key={index}>
             <Link
-              key={index}
               href={item.href}
               className={cn(
                 "w-full rounded-full px-4 py-1 text-center text-sm font-medium transition-all hover:text-foreground",
@@ -46,8 +49,9 @@ export const Nav = (props: NavProps) => {
             >
               {item.label}
             </Link>
-          )
-      )}
+          </WrappedLink>
+        );
+      })}
     </nav>
   );
 };

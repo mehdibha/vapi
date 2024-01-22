@@ -17,6 +17,13 @@ interface HeaderMenuProps {
   children: ReactNode;
 }
 
+interface LinkWrapperProps {
+  children: React.ReactNode;
+}
+const LinkWrapper: React.FC<LinkWrapperProps> = ({ children }) => (
+  <SheetClose asChild>{children}</SheetClose>
+);
+
 const links = siteConfig.global.externalLinks;
 
 export const HeaderMenu = (props: HeaderMenuProps) => {
@@ -30,9 +37,11 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
         <div className="flex-1">
           {status === "unauthenticated" && (
             <div className="mt-8 flex justify-center">
-              <Button asChild size="sm" className="w-[80%]">
-                <Link href="/login">Se connecter</Link>
-              </Button>
+              <SheetClose asChild>
+                <Button asChild size="sm" className="w-[80%]">
+                  <Link href="/login">Se connecter</Link>
+                </Button>
+              </SheetClose>
             </div>
           )}
           {status === "authenticated" && (
@@ -51,7 +60,11 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
             </div>
           )}
           <div className="mx-auto mt-6">
-            <Nav direction="column" items={siteConfig.header.nav.links} />
+            <Nav
+              direction="column"
+              items={siteConfig.header.nav.links}
+              itemWrapper={LinkWrapper}
+            />
           </div>
         </div>
         <div className="flex items-center justify-between">
@@ -59,15 +72,19 @@ export const HeaderMenu = (props: HeaderMenuProps) => {
             {links.map((Link, index) => (
               <React.Fragment key={index}>
                 <a href={Link.url} target="_blank">
-                  <Button size="icon" variant="ghost" className="h-8 w-8">
-                    <Link.icon size={18} />
-                  </Button>
+                  <SheetClose asChild>
+                    <Button size="icon" variant="ghost" className="h-8 w-8">
+                      <Link.icon size={18} />
+                    </Button>
+                  </SheetClose>
                 </a>
                 {index !== links.length - 1 && <Separator orientation="vertical" />}
               </React.Fragment>
             ))}
           </div>
-          <ThemeToggle />
+          <SheetClose asChild>
+            <ThemeToggle />
+          </SheetClose>
         </div>
       </SheetContent>
     </Sheet>
