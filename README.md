@@ -50,7 +50,14 @@
     <figure>
       <img src="/images/home-page.jpg" alt="Home page" width="600">
       <div>
-        <figcaption>Home page</figcaption>
+        <figcaption>Home page - Light mode</figcaption>
+      </div>
+    </figure>
+    <br>
+    <figure>
+      <img src="/images/home-page-dark.jpg" alt="Home page" width="600">
+      <div>
+        <figcaption>Home page- Dark mode</figcaption>
       </div>
     </figure>
   </div>
