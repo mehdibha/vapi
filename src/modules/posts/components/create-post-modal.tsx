@@ -69,6 +69,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
             posts: [
               {
                 ...addedPost,
+                content: addedPost.content.replace(/\n+/g, "\n"),
                 comments: [],
                 createdAt: new Date(),
                 author: {

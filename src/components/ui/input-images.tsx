@@ -75,7 +75,7 @@ export const InputImages = (props: InputImagesProps) => {
         >
           <UploadCloudIcon className="transition duration-300 group-hover:scale-110" />
           <p className="mt-2 text-center text-sm">Ajouter des images</p>
-          <p className="text-xs text-muted-foreground">ou faire glisser-déposer</p>
+          {/* <p className="text-xs text-muted-foreground">ou faire glisser-déposer</p> */}
         </label>
       ) : (
         <label

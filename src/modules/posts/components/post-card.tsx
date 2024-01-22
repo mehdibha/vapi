@@ -1,7 +1,15 @@
 "use client";
 
 import React, { type ForwardedRef } from "react";
+import {
+  Loader2 as SpinnerIcon,
+  MoreVerticalIcon,
+  Trash2Icon,
+  MoreHorizontalIcon,
+} from "lucide-react";
+import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import {
   Carousel,
@@ -10,13 +18,22 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/menu";
 import { Separator } from "@/components/ui/separator";
 import { formatRelativeTime } from "@/utils/date";
+import { shouldTruncate, truncate } from "@/utils/text";
 import { CreateComment } from "@/modules/comments/components/create-comment";
+import { api } from "@/trpc/react";
 
 interface PostCardProps {
   postId: string | null;
   author: {
+    id: string;
     name: string;
     avatar?: string;
   };
@@ -24,8 +41,10 @@ interface PostCardProps {
   content: string;
   images: string[];
   comments: {
+    id: string;
     message: string;
     author: {
+      id: string;
       name: string;
       avatar?: string;
     };
@@ -35,9 +54,86 @@ interface PostCardProps {
 export const PostCard = React.forwardRef(
   (props: PostCardProps, ref: ForwardedRef<HTMLDivElement>) => {
     const { postId, author, createdAt, content, images, comments } = props;
+    const { data } = useSession();
+    const [isTruncated, setIsTruncated] = React.useState(true);
+
+    const utils = api.useUtils();
+    const deletePost = api.post.delete.useMutation({
+      onMutate: async () => {
+        await utils.post.infinitePosts.cancel();
+        utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
+          if (!data) return data;
+
+          return {
+            ...data,
+            pages: data.pages.map((page) => {
+              return {
+                ...page,
+                posts: page.posts.filter((post) => post.id !== postId),
+              };
+            }),
+          };
+        });
+      },
+    });
+
+    const deleteComment = api.comments.delete.useMutation({
+      onMutate: async ({ id: commentId }) => {
+        await utils.post.infinitePosts.cancel();
+        utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
+          if (!data) return data;
+
+          return {
+            ...data,
+            pages: data.pages.map((page) => {
+              return {
+                ...page,
+                posts: page.posts.map((post) => {
+                  if (post.id === postId) {
+                    return {
+                      ...post,
+                      comments: post.comments.filter(
+                        (comment) => comment.id !== commentId
+                      ),
+                    };
+                  }
+                  return post;
+                }),
+              };
+            }),
+          };
+        });
+      },
+    });
 
     return (
-      <Card ref={ref}>
+      <Card className="relative" ref={ref}>
+        {data?.user.id === author.id && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="absolute right-2 top-2 h-7">
+                <MoreHorizontalIcon size={16} />
+                <span className="sr-only">More</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                className="cursor-pointer text-destructive hover:text-destructive"
+                onClick={() => {
+                  if (!postId) return;
+                  deletePost.mutate({ postId });
+                }}
+              >
+                {deletePost.isLoading ? (
+                  <SpinnerIcon className="relative top-[1px] mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2Icon className="relative top-[1px] mr-2 h-4 w-4" />
+                )}
+                Supprimer
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
         <CardHeader>
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -52,36 +148,48 @@ export const PostCard = React.forwardRef(
             </div>
           </div>
         </CardHeader>
-        <div>
-          <p className="p-6 pt-0">{content}</p>
-          {images.length > 0 && (
-            <Carousel className="h-[300px] w-full bg-muted">
-              <CarouselContent>
-                {images.map((image, index) => (
-                  <CarouselItem key={index}>
-                    <img
-                      src={image}
-                      alt="vape"
-                      loading="lazy"
-                      className="h-[300px] w-full object-contain"
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              {images.length > 1 && (
-                <>
-                  <CarouselPrevious className="left-2" />
-                  <CarouselNext className="right-2" />
-                </>
-              )}
-            </Carousel>
+        <div className="p-6">
+          {/* TODO: make this shit better there are edge cases with multiple \n */}
+          <p>{isTruncated ? truncate(content, 160) : content}</p>
+          {shouldTruncate(content, 160) && (
+            <Button
+              variant="link"
+              className="min-w-0 p-0"
+              onClick={() => {
+                setIsTruncated((prev) => !prev);
+              }}
+            >
+              {isTruncated ? "Afficher plus" : "Afficher moins"}
+            </Button>
           )}
         </div>
+        {images.length > 0 && (
+          <Carousel opts={{ loop: true }} className="h-[300px] w-full bg-muted">
+            <CarouselContent>
+              {images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <img
+                    src={image}
+                    alt="vape"
+                    loading="lazy"
+                    className="h-[300px] w-full object-contain"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {images.length > 1 && (
+              <>
+                <CarouselPrevious className="left-2" />
+                <CarouselNext className="right-2" />
+              </>
+            )}
+          </Carousel>
+        )}
         <Separator />
         <div className="space-y-4 p-6">
           {comments.map((comment, index) => {
             return (
-              <div key={index} className="flex space-x-4">
+              <div key={index} className="relative flex space-x-4">
                 <Avatar>
                   <AvatarImage
                     src={comment.author.avatar}
@@ -95,6 +203,36 @@ export const PostCard = React.forwardRef(
                   </p>
                   <p>{comment.message}</p>
                 </div>
+                {data?.user.id === comment.author.id && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-2 top-2 w-7"
+                      >
+                        <MoreVerticalIcon size={16} />
+                        <span className="sr-only">More</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem
+                        className="cursor-pointer text-destructive hover:text-destructive"
+                        onClick={() => {
+                          if (!postId) return;
+                          deleteComment.mutate({ id: comment.id });
+                        }}
+                      >
+                        {deleteComment.isLoading ? (
+                          <SpinnerIcon className="relative top-[1px] mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                          <Trash2Icon className="relative top-[1px] mr-2 h-4 w-4" />
+                        )}
+                        Supprimer
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
             );
           })}

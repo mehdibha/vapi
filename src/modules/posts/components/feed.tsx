@@ -56,6 +56,7 @@ export const Feed = () => {
           ref={posts.length - 2 === index ? ref : undefined}
           postId={post.id}
           author={{
+            id: post.author.id,
             name: post.author.name,
             avatar: post.author.image ?? undefined,
           }}
@@ -63,8 +64,10 @@ export const Feed = () => {
           content={post.content}
           images={post.images}
           comments={post.comments.map((comment) => ({
+            id: comment.id,
             message: comment.message,
             author: {
+              id: comment.author.id,
               name: comment.author.name,
               avatar: comment.author.image ?? undefined,
             },

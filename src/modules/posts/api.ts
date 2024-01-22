@@ -34,6 +34,7 @@ export const postRouter = createTRPCRouter({
           createdAt: true,
           author: {
             select: {
+              id: true,
               name: true,
               image: true,
             },
@@ -44,6 +45,7 @@ export const postRouter = createTRPCRouter({
               message: true,
               author: {
                 select: {
+                  id: true,
                   name: true,
                   image: true,
                 },
@@ -76,7 +78,7 @@ export const postRouter = createTRPCRouter({
       }
       return ctx.db.post.create({
         data: {
-          content: input.content,
+          content: input.content.replace(/\n+/g, "\n"),
           images: input.images,
           author: { connect: { id: ctx.session.user.id } },
         },
@@ -96,7 +98,7 @@ export const postRouter = createTRPCRouter({
       if (post.authorId !== ctx.session.user.id)
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You do not have permission to delete this post",
+          message: "You do not have permission to edit this post",
         });
       return ctx.db.post.update({
         where: { id: input.postId },
