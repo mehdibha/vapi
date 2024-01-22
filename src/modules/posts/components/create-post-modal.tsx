@@ -58,8 +58,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
       setImages([]);
       await utils.post.infinitePosts.cancel();
       utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
-        if (!data) {
-          console.log("no data");
+        if (!data || !userData?.user) {
           return data;
         }
         return {
@@ -73,6 +72,7 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                 comments: [],
                 createdAt: new Date(),
                 author: {
+                  id: userData.user.id,
                   name: userData?.user.name ?? "",
                   image: userData?.user.image ?? null,
                 },
