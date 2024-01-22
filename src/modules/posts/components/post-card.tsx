@@ -55,7 +55,7 @@ export const PostCard = React.forwardRef(
         <div>
           <p className="p-6 pt-0">{content}</p>
           {images.length > 0 && (
-            <Carousel className="h-[300px] bg-muted w-full">
+            <Carousel className="h-[300px] w-full bg-muted">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
