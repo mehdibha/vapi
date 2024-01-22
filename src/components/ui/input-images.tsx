@@ -4,6 +4,7 @@ import { UploadCloudIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils/classes";
+import { resizeImage } from "@/utils/images";
 
 interface Image {
   preview: string;
@@ -35,10 +36,9 @@ export const InputImages = (props: InputImagesProps) => {
                 `${event.target.files.length > 1 ? "Un des fichiers est" : "Fichier"} trop volumineux (max 5MB)`
               );
             } else {
-              onImagesChange((prev) => [
-                ...prev,
-                { file, preview: URL.createObjectURL(file) },
-              ]);
+              resizeImage(file, 1200, 620, ({ file, dataURL }) => {
+                onImagesChange((prev) => [...prev, { file, preview: dataURL }]);
+              });
             }
           }
         }
