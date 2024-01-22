@@ -7,7 +7,7 @@
 <br/>
 <div align="center">
   <a href="https://github.com/mehdibha/vapi.tn">
-    <img src="https://vapi.tn/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://vapi.tn/images/logo.png" alt="Logo" width="160" height="80">
   </a>
   <h1 align="center">vapi.tn</h1>
   <p align="center">
