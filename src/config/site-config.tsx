@@ -3,7 +3,7 @@ import { FacebookIcon, GithubIcon, MailIcon } from "lucide-react";
 export const siteConfig = {
   global: {
     url: "https://vapi.tn",
-    name: "VAPI",
+    name: "Vapi",
     logo: "/images/logo.png",
     title: "Vapi",
     description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",

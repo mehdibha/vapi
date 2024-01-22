@@ -11,7 +11,7 @@ import { Providers } from "./providers";
 const config = siteConfig.global;
 
 export const metadata: Metadata = {
-  title: { default: config.title, template: `%s | ${config.name}` },
+  title: { default: config.title, template: `${config.name} - %s` },
   description: config.description,
   keywords: config.keywords,
   authors: config.authors,

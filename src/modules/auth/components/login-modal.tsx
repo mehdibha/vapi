@@ -31,8 +31,8 @@ export const LoginModal = (props: LoginModalProps) => {
             Vous devez vous connecter pour pouvoir publier.
           </DialogDescription>
         </DialogHeader>
-        <div className="mt-6 space-y-2">
-          <GoogleLoginButton className="mx-auto block" />
+        <div className="mt-6 flex justify-center">
+          <GoogleLoginButton />
         </div>
       </DialogContent>
     </Dialog>
