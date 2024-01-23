@@ -5,8 +5,8 @@ export const siteConfig = {
     url: "https://vapi.tn",
     name: "Vapi",
     logo: "/images/logo.png",
-    title: "Vapi",
-    description: "Première marketplace de vente de cigarettes électroniques en Tunisie.",
+    title: "Vapi - Première marketplace de vente de cigarettes électroniques en Tunisie.",
+    description: "Vapi, site de cigarette électronique, vous donne accès à la communeauté Vape In Tunisia. Vous avez également la possibilité de faire l'achat de vos cigarettes électroniques en ligne.",
     keywords: [],
     authors: [
       {
@@ -15,7 +15,7 @@ export const siteConfig = {
       },
     ],
     creator: "mehdibha",
-    thumbnail: "/images/og-image.png",
+    thumbnail: "/images/thumbnail.jpg",
     twitter: {
       creator: "@mehdibha_",
     },
