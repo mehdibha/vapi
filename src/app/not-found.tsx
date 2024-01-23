@@ -5,10 +5,10 @@ export default function NotFound() {
     <div className="mt-32 flex flex-col items-center space-x-4">
       <h1 className="text-4xl dark:text-white">404</h1>
       <p className="text-lg text-stone-500 dark:text-stone-400">
-        Cette page n&pos;existe pas
+        Cette page n&apos;existe pas
       </p>
       <Button color="primary" className="mt-4">
-        Retour à l&pos;accueil
+        Retour à l&apos;accueil
       </Button>
     </div>
   );
