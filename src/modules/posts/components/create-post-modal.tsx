@@ -76,6 +76,10 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                   name: userData?.user.name ?? "",
                   image: userData?.user.image ?? null,
                 },
+                _count:{
+                  comments: 0,
+                  likes: 0,
+                }
               },
               ...page.posts,
             ],

@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
-export const commentsRouter = createTRPCRouter({
+export const commentRouter = createTRPCRouter({
   add: protectedProcedure
     .input(z.object({ postId: z.string(), message: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {

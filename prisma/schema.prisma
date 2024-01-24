@@ -20,6 +20,7 @@ model User {
     sessions      Session[]
     posts         Post[]
     comments      Comment[]
+    likes         Like[]
 }
 
 model Account {
@@ -65,6 +66,8 @@ model VerificationToken {
 model Post {
     id        String    @id @default(cuid())
     content   String
+    phone     String?
+    city      String?
     images    String[]
     published Boolean   @default(false)
     author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -72,6 +75,7 @@ model Post {
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     comments  Comment[]
+    likes     Like[]
 }
 
 model Comment {
@@ -83,4 +87,39 @@ model Comment {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Like {
+    authorId String
+    postId   String
+    author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@id(name: "likeId", [postId, authorId])
+}
+
+enum city {
+    tunis
+    sousse
+    sfax
+    bizerte
+    gafsa
+    kef
+    manouba
+    medenine
+    nabeul
+    siliana
+    jendouba
+    kairouan
+    kasserine
+    mahdia
+    monastir
+    tataouine
+    zaghouan
+    ariana
+    ben_arous
+    gabes
+    kebili
+    tozeur
+    sidi_bouzid
 }

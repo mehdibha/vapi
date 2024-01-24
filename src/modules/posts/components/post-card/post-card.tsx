@@ -6,6 +6,8 @@ import {
   MoreVerticalIcon,
   Trash2Icon,
   MoreHorizontalIcon,
+  MessageCircleIcon,
+  MapPinIcon,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -25,10 +27,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/menu";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/utils/classes";
 import { formatRelativeTime } from "@/utils/date";
 import { shouldTruncate, truncate } from "@/utils/text";
+import { cities } from "@/config/constants";
 import { CreateComment } from "@/modules/comments/components/create-comment";
+import { LikesCount } from "@/modules/likes/components/likes-count";
 import { api } from "@/trpc/react";
+import { PostCardInteractions } from "./post-card-iteractions";
 
 interface PostCardProps {
   postId: string | null;
@@ -39,6 +45,8 @@ interface PostCardProps {
   };
   createdAt: Date;
   content: string;
+  phone: string | null;
+  city: string | null;
   images: string[];
   comments: {
     id: string;
@@ -49,13 +57,29 @@ interface PostCardProps {
       avatar?: string;
     };
   }[];
+  likesCount: number;
+  commentsCount: number;
 }
 
 export const PostCard = React.forwardRef(
   (props: PostCardProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { postId, author, createdAt, content, images, comments } = props;
+    const {
+      postId,
+      author,
+      createdAt,
+      content,
+      phone,
+      city,
+      likesCount,
+      commentsCount,
+      images,
+      comments,
+    } = props;
     const { data } = useSession();
     const [isTruncated, setIsTruncated] = React.useState(true);
+    const formattedCity = city
+      ? cities.find((c) => c.value === city)?.label ?? null
+      : null;
 
     const utils = api.useUtils();
     const deletePost = api.post.delete.useMutation({
@@ -77,7 +101,7 @@ export const PostCard = React.forwardRef(
       },
     });
 
-    const deleteComment = api.comments.delete.useMutation({
+    const deleteComment = api.comment.delete.useMutation({
       onMutate: async ({ id: commentId }) => {
         await utils.post.infinitePosts.cancel();
         utils.post.infinitePosts.setInfiniteData({ limit: 10, search: "" }, (data) => {
@@ -134,8 +158,8 @@ export const PostCard = React.forwardRef(
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <CardHeader>
-          <div className="flex items-center space-x-4">
+        <CardHeader className="p-6  pb-0">
+          <div className="flex items-start space-x-4">
             <Avatar>
               <AvatarImage src={author.avatar} alt={`${author.name}'s profile picture`} />
               <AvatarFallback>{author.name[0]}</AvatarFallback>
@@ -148,7 +172,12 @@ export const PostCard = React.forwardRef(
             </div>
           </div>
         </CardHeader>
-        <div className="p-6">
+        <div className="p-6 pt-4">
+          {formattedCity && (
+            <div className="mb-1 flex items-center space-x-1 text-muted-foreground">
+              <MapPinIcon size={18} /> <span>{formattedCity}</span>
+            </div>
+          )}
           {/* TODO: make this shit better there are edge cases with multiple \n */}
           <p>{isTruncated ? truncate(content, 160) : content}</p>
           {shouldTruncate(content, 160) && (
@@ -185,6 +214,21 @@ export const PostCard = React.forwardRef(
             )}
           </Carousel>
         )}
+        <div
+          className={cn("flex items-center justify-between p-4", {
+            "justify-end": likesCount === 0 && commentsCount > 0,
+          })}
+        >
+          <LikesCount postId={postId} />
+          {commentsCount > 0 && (
+            <div className="flex items-center space-x-2 text-muted-foreground">
+              <span>6</span>
+              <MessageCircleIcon className="h-4 w-4" />
+            </div>
+          )}
+        </div>
+        <Separator />
+        <PostCardInteractions postId={postId} phone={phone} />
         <Separator />
         <div className="space-y-4 p-6">
           {comments.map((comment, index) => {

@@ -2,6 +2,7 @@
 
 import React, { type KeyboardEvent } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SendHorizonalIcon } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -35,7 +36,7 @@ export const CreateComment = (props: CreateCommentProps) => {
     resolver: zodResolver(addCommentSchema),
   });
 
-  const addComment = api.comments.add.useMutation({
+  const addComment = api.comment.add.useMutation({
     onMutate: async (newComment) => {
       await utils.post.infinitePosts.cancel();
       // @ts-expect-error No id in comment fix later
@@ -113,7 +114,7 @@ export const CreateComment = (props: CreateCommentProps) => {
                           ref={textareaRef}
                           placeholder="Ecrivez votre commentaire"
                           rows={1}
-                          className="mt-1 min-h-0 w-full resize-none"
+                          className="min-h-0 w-full resize-none"
                           value={field.value}
                           onKeyDown={handleKeyDown}
                           onChange={(e) => {
@@ -130,8 +131,8 @@ export const CreateComment = (props: CreateCommentProps) => {
                 }}
               />
               <div className="mt-2 flex justify-end">
-                <Button type="submit" size="sm">
-                  Commenter
+                <Button variant="ghost" size="icon" type="submit">
+                  <SendHorizonalIcon />
                 </Button>
               </div>
             </form>
@@ -151,7 +152,9 @@ export const CreateComment = (props: CreateCommentProps) => {
         </LoginModal>
         <div className="mt-2 flex justify-end">
           <LoginModal>
-            <Button size="sm">Commenter</Button>
+            <Button variant="ghost" size="icon" type="submit">
+              <SendHorizonalIcon />
+            </Button>
           </LoginModal>
         </div>
       </div>

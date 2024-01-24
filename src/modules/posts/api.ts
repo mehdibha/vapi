@@ -31,6 +31,8 @@ export const postRouter = createTRPCRouter({
           id: true,
           content: true,
           images: true,
+          phone: true,
+          city: true,
           createdAt: true,
           author: {
             select: {
@@ -50,6 +52,12 @@ export const postRouter = createTRPCRouter({
                   image: true,
                 },
               },
+            },
+          },
+          _count: {
+            select: {
+              likes: true,
+              comments: true,
             },
           },
         },

@@ -1,4 +1,5 @@
-import { commentsRouter } from "@/modules/comments/api";
+import { commentRouter } from "@/modules/comments/api";
+import { likeRouter } from "@/modules/likes/api";
 import { postRouter } from "@/modules/posts/api";
 import { createTRPCRouter } from "@/server/api/trpc";
 
@@ -9,7 +10,8 @@ import { createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  comments: commentsRouter,
+  comment: commentRouter,
+  like: likeRouter
 });
 
 // export type definition of API

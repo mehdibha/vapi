@@ -6,7 +6,7 @@ import { useDebounce } from "use-debounce";
 import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
-import { PostCardSkeleton } from "./post-card-skeleton";
+import { PostCardSkeleton } from "./post-card/post-card-skeleton";
 import { SearchInput } from "./search-input";
 
 export const Feed = () => {
@@ -16,6 +16,8 @@ export const Feed = () => {
   const { ref, entry } = useInView({
     threshold: 0,
   });
+  // we fetch likes from here to avoid like button glitching
+  api.like.all.useQuery();
   const { data, isLoading, fetchNextPage, isFetchingNextPage } =
     api.post.infinitePosts.useInfiniteQuery(
       {
@@ -60,8 +62,9 @@ export const Feed = () => {
             name: post.author.name,
             avatar: post.author.image ?? undefined,
           }}
-          createdAt={post.createdAt}
           content={post.content}
+          phone={post.phone}
+          city={post.city}
           images={post.images}
           comments={post.comments.map((comment) => ({
             id: comment.id,
@@ -72,6 +75,9 @@ export const Feed = () => {
               avatar: comment.author.image ?? undefined,
             },
           }))}
+          likesCount={post._count.likes}
+          commentsCount={post._count.comments}
+          createdAt={post.createdAt}
         />
       ))}
       {(isLoading || isFetchingNextPage) &&
