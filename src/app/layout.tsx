@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/utils/classes";
+import { truncateOnWord } from "@/utils/text";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config";
@@ -12,7 +13,7 @@ const config = siteConfig.global;
 
 export const metadata: Metadata = {
   title: { default: config.title, template: `${config.name} - %s` },
-  description: config.description,
+  description: truncateOnWord(config.description, 148, true),
   keywords: config.keywords,
   authors: config.authors,
   creator: config.creator,
@@ -27,14 +28,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: config.url,
     title: config.title,
-    description: config.description,
+    description: truncateOnWord(config.description, 148, true),
     siteName: config.name,
     images: [config.thumbnail],
   },
   twitter: {
     card: "summary_large_image",
     title: config.title,
-    description: config.description,
+    description: truncateOnWord(config.description,148,true),
     images: [config.thumbnail],
     creator: config.twitter.creator,
   },
