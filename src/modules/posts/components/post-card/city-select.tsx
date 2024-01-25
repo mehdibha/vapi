@@ -31,7 +31,7 @@ export function CitySlect(props: CitySelectProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between h-9"
+          className="h-9 w-[200px] justify-between"
         >
           {value
             ? cities.find((city) => city.value === value)?.label

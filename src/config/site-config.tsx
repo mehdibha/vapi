@@ -6,9 +6,16 @@ export const siteConfig = {
     name: "Vapi",
     logo: "/images/logo.png",
     title: "Vapi - Première marketplace de vente de cigarettes électroniques en Tunisie.",
-    description: 
+    description:
       "Vapi, site de cigarette électronique, vous donne accès à la communeauté Vape In Tunisia. Vous avez également la possibilité de faire l'achat de vos cigarettes électroniques en ligne.",
-    keywords: [""],
+    keywords: [
+      "vape jetable tunisie",
+      "vape jetable",
+      "vapoter tunisie",
+      "vape tunsie",
+      "cigarette électronique tunisie",
+      "vape",
+    ],
     authors: [
       {
         name: "mehdibha",

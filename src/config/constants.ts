@@ -91,5 +91,4 @@ export const cities = [
     value: "sidi_bouzid",
     label: "Sidi Bouzid",
   },
-
 ];

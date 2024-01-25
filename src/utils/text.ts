@@ -8,7 +8,10 @@ export const truncateOnWord = (text: string, maxLength: number, ellipsis = true)
 
   // Then split on the last space, this way we split on the last word,
   // which looks just a bit nicer.
-  truncatedText = truncatedText.substring(0, Math.min(truncatedText.length, truncatedText.lastIndexOf(" ")));
+  truncatedText = truncatedText.substring(
+    0,
+    Math.min(truncatedText.length, truncatedText.lastIndexOf(" "))
+  );
 
   if (ellipsis) truncatedText += "...";
 

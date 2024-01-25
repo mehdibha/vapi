@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: config.title,
-    description: truncateOnWord(config.description,148,true),
+    description: truncateOnWord(config.description, 148, true),
     images: [config.thumbnail],
     creator: config.twitter.creator,
   },

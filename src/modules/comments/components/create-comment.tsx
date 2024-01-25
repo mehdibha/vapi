@@ -25,7 +25,7 @@ interface CreateCommentProps {
 }
 
 export const CreateComment = (props: CreateCommentProps) => {
-  const { postId,inputRef } = props;
+  const { postId, inputRef } = props;
 
   const { data: userData, status } = useSession();
   const utils = api.useUtils();
