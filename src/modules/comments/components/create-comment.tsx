@@ -20,15 +20,15 @@ const addCommentSchema = z.object({
 type AddCommentSchemaType = z.infer<typeof addCommentSchema>;
 
 interface CreateCommentProps {
+  inputRef: React.RefObject<HTMLTextAreaElement>;
   postId: string | null;
 }
 
 export const CreateComment = (props: CreateCommentProps) => {
-  const { postId } = props;
+  const { postId,inputRef } = props;
 
-  const utils = api.useUtils();
   const { data: userData, status } = useSession();
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const utils = api.useUtils();
   const form = useForm<AddCommentSchemaType>({
     defaultValues: {
       message: "",
@@ -111,18 +111,18 @@ export const CreateComment = (props: CreateCommentProps) => {
                     <FormItem>
                       <FormControl>
                         <Textarea
-                          ref={textareaRef}
+                          ref={inputRef}
                           placeholder="Ecrivez votre commentaire"
                           rows={1}
                           className="min-h-0 w-full resize-none"
                           value={field.value}
                           onKeyDown={handleKeyDown}
                           onChange={(e) => {
-                            if (!textareaRef.current) return;
+                            if (!inputRef.current) return;
                             field.onChange(e.target.value);
-                            textareaRef.current.style.height = "auto";
-                            textareaRef.current.style.height =
-                              textareaRef.current.scrollHeight + 2 + "px";
+                            inputRef.current.style.height = "auto";
+                            inputRef.current.style.height =
+                              inputRef.current.scrollHeight + 2 + "px";
                           }}
                         />
                       </FormControl>
@@ -131,7 +131,12 @@ export const CreateComment = (props: CreateCommentProps) => {
                 }}
               />
               <div className="mt-2 flex justify-end">
-                <Button variant="ghost" size="icon" type="submit">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  type="submit"
+                  disabled={!form.formState.isValid}
+                >
                   <SendHorizonalIcon />
                 </Button>
               </div>
@@ -142,24 +147,20 @@ export const CreateComment = (props: CreateCommentProps) => {
     );
   }
 
-  if (status === "unauthenticated") {
+  if (status === "unauthenticated" || status === "loading") {
     return (
       <div className="w-full">
-        <LoginModal>
+        <LoginModal disabled={status === "loading"}>
           <div className="mt-1 rounded-md border border-input px-3 py-2 text-sm text-muted-foreground shadow-sm">
             Ecrivez votre commentaire
           </div>
         </LoginModal>
         <div className="mt-2 flex justify-end">
-          <LoginModal>
-            <Button variant="ghost" size="icon" type="submit">
-              <SendHorizonalIcon />
-            </Button>
-          </LoginModal>
+          <Button variant="ghost" size="icon" type="submit" disabled>
+            <SendHorizonalIcon />
+          </Button>
         </div>
       </div>
     );
   }
-
-  return <div>CreateComment</div>;
 };

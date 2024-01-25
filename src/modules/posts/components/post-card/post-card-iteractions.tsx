@@ -7,10 +7,11 @@ import { LikeButton } from "@/modules/likes/components/like-button";
 interface PostCardInteractionsProps {
   postId: string | null;
   phone: string | null;
+  onCommentClick: () => void;
 }
 
 export const PostCardInteractions = (props: PostCardInteractionsProps) => {
-  const { postId, phone } = props;
+  const { postId, phone, onCommentClick } = props;
 
   const [showTel, setShowTel] = React.useState(false);
 
@@ -19,11 +20,13 @@ export const PostCardInteractions = (props: PostCardInteractionsProps) => {
   };
 
   return (
-    <div className={cn("grid grid-cols-3 p-2",{
-      "grid-cols-2": !phone
-    })}>
+    <div
+      className={cn("grid grid-cols-3 p-2", {
+        "grid-cols-2": !phone,
+      })}
+    >
       <LikeButton postId={postId} />
-      <Button variant="ghost">
+      <Button variant="ghost" onClick={onCommentClick}>
         <MessageCircleIcon className="mr-2.5 h-6 w-6" />
         <span className="hidden xs:block">Commenter</span>
       </Button>

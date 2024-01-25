@@ -21,9 +21,7 @@ export const LoginModal = (props: LoginModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger disabled={disabled} asChild>
-        {children}
-      </DialogTrigger>
+      {disabled ? children : <DialogTrigger asChild>{children}</DialogTrigger>}
       <DialogContent className="max-w-sm pt-10">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">Se connecter</DialogTitle>

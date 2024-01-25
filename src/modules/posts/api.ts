@@ -73,7 +73,26 @@ export const postRouter = createTRPCRouter({
       };
     }),
   create: protectedProcedure
-    .input(z.object({ content: z.string(), images: z.array(z.string().url()) }))
+    .input(
+      z.object({
+        content: z.string(),
+        images: z.array(z.string().url()),
+        phone: z
+          .string()
+          .length(8)
+          .refine(
+            (value) => {
+              return ["2", "5", "4", "9", "3", "7"].some((char) =>
+                value.startsWith(char)
+              );
+            },
+            {
+              message: "Not a valid phone number",
+            }
+          ),
+        city: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       if (input.images.length === 0 && input.content === "") {
         throw new TRPCError({ code: "BAD_REQUEST", message: "Post cannot be empty" });
@@ -84,11 +103,26 @@ export const postRouter = createTRPCRouter({
           message: "Post cannot have more than 5 images",
         });
       }
+      // if (
+      //   ctx.session.user.phone !== input.phone ||
+      //   ctx.session.user.city !== input.city
+      // ) {
+      //   await ctx.db.user.update({
+      //     where: { id: ctx.session.user.id },
+      //     // @ts-expect-error TODO add validation to zod schema to fix this
+      //     data: {
+      //       ...(ctx.session.user.phone !== input.phone && { phone: input.phone }),
+      //       ...(ctx.session.user.city !== input.city && { city: input.city }),
+      //     },
+      //   });
+      // }
       return ctx.db.post.create({
         data: {
           content: input.content.replace(/\n+/g, "\n"),
           images: input.images,
           author: { connect: { id: ctx.session.user.id } },
+          phone: input.phone,
+          city: input.city,
         },
       });
     }),

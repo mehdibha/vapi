@@ -75,11 +75,17 @@ export const PostCard = React.forwardRef(
       images,
       comments,
     } = props;
+    const inputRef = React.useRef<HTMLTextAreaElement>(null);
     const { data } = useSession();
     const [isTruncated, setIsTruncated] = React.useState(true);
     const formattedCity = city
       ? cities.find((c) => c.value === city)?.label ?? null
       : null;
+
+    const handleCommentClick = () => {
+      if (!inputRef.current) return;
+      inputRef.current.focus();
+    };
 
     const utils = api.useUtils();
     const deletePost = api.post.delete.useMutation({
@@ -222,13 +228,17 @@ export const PostCard = React.forwardRef(
           <LikesCount postId={postId} />
           {commentsCount > 0 && (
             <div className="flex items-center space-x-2 text-muted-foreground">
-              <span>6</span>
+              <span>{commentsCount}</span>
               <MessageCircleIcon className="h-4 w-4" />
             </div>
           )}
         </div>
         <Separator />
-        <PostCardInteractions postId={postId} phone={phone} />
+        <PostCardInteractions
+          postId={postId}
+          phone={phone}
+          onCommentClick={handleCommentClick}
+        />
         <Separator />
         <div className="space-y-4 p-6">
           {comments.map((comment, index) => {
@@ -280,7 +290,7 @@ export const PostCard = React.forwardRef(
               </div>
             );
           })}
-          <CreateComment postId={postId} />
+          <CreateComment inputRef={inputRef} postId={postId} />
         </div>
       </Card>
     );

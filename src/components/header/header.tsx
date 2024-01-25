@@ -31,7 +31,7 @@ export const Header = () => {
         <Nav items={siteConfig.header.nav.links} className="hidden md:block" />
         <div className="flex items-center justify-end space-x-4 md:w-[200px]">
           {status === "unauthenticated" && (
-            <Button asChild size="sm" className="hidden md:inline-flex">
+            <Button asChild size="sm" variant="default" className="hidden md:inline-flex">
               <Link href="/login">Se connecter</Link>
             </Button>
           )}

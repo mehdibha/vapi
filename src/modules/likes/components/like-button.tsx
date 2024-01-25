@@ -1,7 +1,9 @@
 import React from "react";
 import { ThumbsUpIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/classes";
+import { LoginModal } from "@/modules/auth/components/login-modal";
 import { api } from "@/trpc/react";
 
 interface LikeButtonProps {
@@ -11,6 +13,7 @@ interface LikeButtonProps {
 export const LikeButton = (props: LikeButtonProps) => {
   const { postId } = props;
 
+  const { status } = useSession();
   const utils = api.useUtils();
   const likes = api.like.all.useQuery();
   const liked = likes.data?.some((like) => like.post.id === postId);
@@ -50,14 +53,17 @@ export const LikeButton = (props: LikeButtonProps) => {
     }
   };
 
+  const Wrapper = status === "authenticated" ? React.Fragment : LoginModal;
   return (
-    <Button
-      variant="ghost"
-      disabled={!likes.isFetched || !postId}
-      onClick={handleLikeClick}
-    >
-      <ThumbsUpIcon className={cn("mr-2.5 h-6 w-6", { "fill-foreground": liked })} />
-      <span className="hidden xs:block">J&apos;aime</span>
-    </Button>
+    <Wrapper>
+      <Button
+        variant="ghost"
+        disabled={status === "authenticated" && (!likes.isFetched || !postId)}
+        onClick={status === "authenticated" ? handleLikeClick : undefined}
+      >
+        <ThumbsUpIcon className={cn("mr-2.5 h-6 w-6", { "fill-foreground": liked })} />
+        <span className="hidden xs:block">J&apos;aime</span>
+      </Button>
+    </Wrapper>
   );
 };

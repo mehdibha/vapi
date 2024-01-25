@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -51,6 +52,10 @@ export const authOptions: NextAuthOptions = {
         ...session.user,
         // @ts-expect-error `sub` is not defined on `session`.
         id: token.sub,
+        // @ts-expect-error `phone` is not defined on `session`.
+        phone: token?.user?.phone,
+        // @ts-expect-error `city` is not defined on `session`.
+        city: token?.user?.city,
       };
       return session;
     },

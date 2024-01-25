@@ -14,15 +14,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { InputImages } from "@/components/ui/input-images";
 import { Textarea } from "@/components/ui/textarea";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import { useSession } from "@/modules/auth/hooks";
 import { uploadFiles } from "@/modules/upload/services";
 import { api } from "@/trpc/react";
+import { CitySlect } from "./post-card/city-select";
 
 const createPostSchema = z.object({
   content: z.string(),
+  phone: z.string(),
+  city: z.string(),
 });
 
 type CreatePostSchemaType = z.infer<typeof createPostSchema>;
@@ -40,8 +44,10 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [images, setImages] = React.useState<{ preview: string; file: File }[]>([]);
   const form = useForm<CreatePostSchemaType>({
-    defaultValues: {
+    values: {
       content: "",
+      phone: userData?.user?.phone ?? "",
+      city: userData?.user?.city ?? "",
     },
     resolver: zodResolver(createPostSchema),
   });
@@ -76,10 +82,10 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
                   name: userData?.user.name ?? "",
                   image: userData?.user.image ?? null,
                 },
-                _count:{
+                _count: {
                   comments: 0,
                   likes: 0,
-                }
+                },
               },
               ...page.posts,
             ],
@@ -95,6 +101,8 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
       const uploadedImages = await uploadFiles(images.map((image) => image.file));
       createPost.mutate({
         content: values.content,
+        phone: values.phone.trim(),
+        city: values.city,
         images: uploadedImages.filter(Boolean) as string[],
       });
     } catch (error) {
@@ -128,6 +136,34 @@ export const CreatePostModal = (props: CreatePostModalProps) => {
             </div>
             <div className="h-[250px] overflow-y-scroll px-0 pb-6">
               <div className="px-6 pt-1">
+                <div className="mb-2 flex space-x-2">
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => {
+                      return (
+                        <FormItem>
+                          <FormControl>
+                            <Input type="tel" placeholder="Tel" {...field} />
+                          </FormControl>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => {
+                      return (
+                        <FormItem>
+                          <FormControl>
+                            <CitySlect {...field} />
+                          </FormControl>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="content"
