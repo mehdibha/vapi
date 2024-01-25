@@ -34,7 +34,7 @@ import { cities } from "@/config/constants";
 import { CreateComment } from "@/modules/comments/components/create-comment";
 import { LikesCount } from "@/modules/likes/components/likes-count";
 import { api } from "@/trpc/react";
-import { PostCardInteractions } from "./post-card-iteractions";
+import { PostCardInteractions } from "./post-card-interactions";
 
 interface PostCardProps {
   postId: string | null;

@@ -1,8 +1,9 @@
 import React from "react";
-import { CopyIcon, MessageCircleIcon, PhoneIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, MessageCircleIcon, PhoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/classes";
 import { LikeButton } from "@/modules/likes/components/like-button";
+import Link from "next/link";
 
 interface PostCardInteractionsProps {
   postId: string | null;
@@ -14,9 +15,18 @@ export const PostCardInteractions = (props: PostCardInteractionsProps) => {
   const { postId, phone, onCommentClick } = props;
 
   const [showTel, setShowTel] = React.useState(false);
+  const [isCopied, setIsCopied] = React.useState(false);
 
   const handleClickTel = () => {
     setShowTel(true);
+  };
+
+  const handleCopyTel = () => {
+    if (!phone) return;
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+    void navigator.clipboard.writeText(phone);
+    // toast("Copié dans le presse-papier")
   };
 
   return (
@@ -33,16 +43,23 @@ export const PostCardInteractions = (props: PostCardInteractionsProps) => {
       {phone &&
         (showTel ? (
           <div className="flex items-center justify-center animate-in fade-in">
-            <Button variant="ghost" onClick={handleClickTel}>
+            <Button variant="ghost" asChild>
+              <Link href={`tel:${phone}`}>
               <PhoneIcon className="mr-2.5 h-6 w-6 pt-1" />
               <span className="hidden xs:block">{phone}</span>
+              </Link>
             </Button>
             <Button
               size="icon"
               variant="ghost"
               className="h-11 w-11 flex-col items-center justify-center"
+              onClick={handleCopyTel}
             >
-              <CopyIcon size={15} className="pt-0.5" />
+              {isCopied ? (
+                <CheckIcon size={15} className="pt-0.5 animate-in fade-in" />
+              ) : (
+                <CopyIcon size={15} className="pt-0.5 animate-in fade-in" />
+              )}
               <span className="text-[10px] font-extralight">Copier</span>
             </Button>
           </div>
