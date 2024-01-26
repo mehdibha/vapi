@@ -7,7 +7,7 @@ import { api } from "@/trpc/react";
 import { CreatePostCard } from "./create-post-card";
 import { PostCard } from "./post-card";
 import { PostCardSkeleton } from "./post-card/post-card-skeleton";
-import { SearchInput } from "./search-input";
+import { SearchInput } from "../../../components/search-input";
 
 export const Feed = () => {
   const limit = 10;

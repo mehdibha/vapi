@@ -75,6 +75,7 @@ export const PostCard = React.forwardRef(
       images,
       comments,
     } = props;
+    
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
     const { data } = useSession();
     const [isTruncated, setIsTruncated] = React.useState(true);

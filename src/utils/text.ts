@@ -3,11 +3,8 @@ const LINE_BREAK_LENGTH = 50;
 export const truncateOnWord = (text: string, maxLength: number, ellipsis = true) => {
   if (text.length <= maxLength) return text;
 
-  // First split on maxLength chars
   let truncatedText = text.substring(0, maxLength);
 
-  // Then split on the last space, this way we split on the last word,
-  // which looks just a bit nicer.
   truncatedText = truncatedText.substring(
     0,
     Math.min(truncatedText.length, truncatedText.lastIndexOf(" "))
@@ -17,6 +14,7 @@ export const truncateOnWord = (text: string, maxLength: number, ellipsis = true)
 
   return truncatedText;
 };
+
 // TODO Fix this shit
 export const truncate = (text: string, maxLength: number) => {
   const lines = text.split("\n");
@@ -30,4 +28,13 @@ export const truncate = (text: string, maxLength: number) => {
 
 export const shouldTruncate = (text: string, maxLength: number) => {
   return text.length + text.split("\n").length * (LINE_BREAK_LENGTH - 1) > maxLength;
+};
+
+export const upperFirst = (str : string) => {
+  
+  if (typeof str !== "string" || str.length === 0) {
+    return str;
+  }
+
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };

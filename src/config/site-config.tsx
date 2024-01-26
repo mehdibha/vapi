@@ -35,7 +35,11 @@ export const siteConfig = {
   },
   header: {
     nav: {
-      links: [{ href: "/", label: "Communauté" }],
+      links: [
+        { href: "/", label: "Communauté" },
+        { href: "/marketplace", label: "Marketplace" },
+        { href: "/vape-stores", label: "Vape stores" },
+      ],
     },
     cta: {
       primary: {

@@ -1,13 +1,8 @@
 import type { ReactNode } from "react";
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils/classes";
-
-export const metadata: Metadata = {
-  title: "Login",
-};
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
